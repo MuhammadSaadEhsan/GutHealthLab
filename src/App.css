@@ -1,0 +1,687 @@
+.App {
+  font-family: "Poppins" !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  box-shadow: 1px 0 10px 1px;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.button {
+  background-color: #0B233A;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.button5 {
+  background-color: #4c839c;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.button5:hover,.button:hover {
+  background-color: #11A3CF;
+  scale: 1.05;
+}
+
+.button:active {
+  background-color: #11A3CF;
+  scale: 1;
+}
+
+.button2 {
+  background-color: #0B233A;
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.button2:hover {
+  background-color: #11A3CF;
+}
+
+.button2:active {
+  background-color: #11A3CF;
+  scale: 1;
+}
+
+.button3 {
+  background-color: #11A3CF;
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.button3:hover {
+  background-color: #0B233A;
+}
+
+.button3:active {
+  background-color: #0B233A;
+}
+
+.button3:active {
+  background-color: #0B233A;
+  scale: 1;
+}
+
+.maininedxdiv {
+  width: 100%;
+  /* height: 90vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Carouseldiv {
+  background-color: #fff;
+  height: fit-content;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.Carouseldiv div h1 {
+  font-size: 3em;
+}
+
+.Carouseldiv div p {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.Carouseldiv div {
+  background-color: #CEE3E9;
+  min-height: 350px;
+  height: fit-content;
+  width: 85%;
+  border-radius: 30px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.slick-dots-bottom li {
+  background-color: #0B233A;
+  border-radius: 50%;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.slick-dots li.slick-active {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #76cf11;
+}
+
+.slick-dots li button::after {
+  position: absolute;
+  inset: -4px;
+  content: "";
+  /* width: 100px;
+  height: 100px; */
+  width: 20px;
+  height: 20px;
+  /* background-color: #11A3CF; */
+  /* display: none !important; */
+}
+
+.mainformdiv {
+  /* background-color: #76cf11; */
+  margin-top: 0px;
+  width: 100%;
+  min-height: 90vh;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 80%;
+  padding: 50px 0;
+  /* background-color: #11A3CF; */
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: large;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+form div input,
+select {
+  border-radius: 6px;
+  border: none;
+  height: 40px;
+  padding: 0 20px;
+  border-width: 0px 0px 0px 0px;
+  outline: none;
+  background-color: #E2E2E2;
+}
+
+/* form div input:focus {
+  box-shadow: 0 0 5px #1093BD;
+} */
+
+.radiobtn {
+  /* background-color: #1093BD; */
+  display: flex !important;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.radiobtn input {
+  width: 15px;
+  height: 15px;
+}
+
+.mobbb {
+  flex-direction: row !important;
+}
+
+.widhtttt {
+  width: 49%;
+}
+
+.flexxx {
+  flex-direction: row;
+  gap: 30px;
+}
+
+@media screen and (max-width: 1060px) {
+  .flexxx {
+    flex-direction: column;
+  }
+  .widhtttt {
+    width: 100%;
+  }
+  /* .maininedxdiv {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    width: 100%;
+} */
+
+  .mobbb {
+    flex-direction: column !important;
+  }
+}
+
+/* Basic Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 36px;
+  /* background-color: #0B233A; */
+  color: white;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Hamburger Button */
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: white;
+  /* color: black; */
+  cursor: pointer;
+  display: none; /* Hidden by default for larger screens */
+}
+
+/* Navbar Links */
+.nav-links {
+  display: flex;
+  gap: 55px;
+}
+
+.nav-links button {
+  background-color: #0B233A;
+  color: white;
+  border: none;
+  margin-left: 22px;
+  padding: 13px 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-links button:hover {
+  background-color: #11A3CF;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+  .navbar {
+    background-color: #0B233A;
+    justify-content: space-between;
+  }
+  .hamburger {
+    display: block; /* Show hamburger button on small screens */
+  }
+
+  .nav-links {
+    display: none; /* Hide links by default */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #0B233A;
+    padding: 20px 0;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links.open {
+    display: flex; /* Show links when menu is open */
+  }
+
+  .nav-links button {
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+  }
+}
+
+.navbar {
+  width: 90%;
+  height: 100px;
+  /* background-color: #4180b7    ; */
+  /* background-color: #6e4e9f    ; */
+  background-color: #fff;
+  display: flex;
+  padding: 0 5%;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 5px 0.5px #002631;
+  /* border-radius: 0px 0px 50px 50px; */
+  position: fixed;
+  z-index: 20;
+}
+
+.mybutton {
+  border-radius: 20px;
+  background: #11a4d0;
+  padding: 15px 30px;
+  color: white;
+  font-size: 17px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  display: absolute;
+  z-index: 1;
+  /* transition: background 0.3s ease-in-out; */
+}
+
+/* .mybutton:hover {
+  background: #0e8fb8;
+} */
+/* .myimage {
+  width: 70%;
+  position: absolute;
+  bottom: -20px;
+  left: -80px;
+} */
+.image-container {
+  position: relative;
+  width: 100%; 
+  height: 80vh;
+  /* background:red; */
+}
+
+.myimage {
+  bottom: 0px;
+  width: 70%;
+  display: block;
+  position: absolute;
+  margin-left: -60px;
+}
+.search-heading {
+  color: #0B233A;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.search-container {
+  position: relative;
+  width: 150%;
+  max-width: 500px;
+  margin: 30px auto 0; /* Center the search bar */
+  margin-left: -120px;
+  display: flex;
+  align-items: center;
+}
+
+/* .search-bar {
+  width: 100%;
+  padding: 12px 15px 12px 25px; 
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  background: #0b233a;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding-right: 40px;
+}
+
+.search-bar::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px; 
+  color: white;
+  font-size: 20px;
+  pointer-events: none; 
+} */
+
+.first-row {
+  /* background: green; */
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 7rem;
+  padding-left: 7rem;
+  width: 100%;
+  height: 22vh;
+}
+.first-row {
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 7rem;
+  padding-left: 7rem;
+}
+
+/* Apply 1rem padding when screen width is 936px or less */
+@media screen and (max-width: 936px) {
+  .first-row {
+    padding: 2.4rem;
+  }
+}
+@media screen and (max-width: 515px) {
+  .first-row {
+    flex-direction: column;
+    align-items: center; /* Center items for better mobile view */
+    text-align: center; /* Center text content */
+  }
+  .main-heading{
+    font-size: 0.5rem;
+  }
+  .search-heading{
+    font-size: 1.5rem;
+  }
+  .search-bar{
+    width: 50%;
+  }
+  .myform{
+    width: 100%;
+  }
+  .mainformdiv{
+    width: 90%;
+    margin-left: -150px;
+    /* margin-top: -100px; */
+    /* overflow: auto; */
+    height: 70vh;
+    min-height: auto;
+    margin-top: 100px;
+    justify-content: flex-start;
+     
+  }
+  body, html {
+    overflow-x: hidden!important; /* Prevent horizontal scrolling */
+  overflow-y: auto!important; /* Allow vertical scrolling */
+  height: auto!important; /* Let content define the height */
+  margin: 0!important;
+  padding: 0!important;
+    scrollbar-width: thin!important; 
+    scrollbar-color: #0B233A #E2E2E2!important;
+  }
+  .myform{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  .fsform{
+    margin-top: 120px;
+  }
+  .microbiome{
+    width: 20rem !important;
+    margin-top: 35px !important;
+    margin-left: 20px !important;
+  }
+  .myimage{
+    position: absolute;
+    display: block;
+    bottom: 0px;
+  }
+  .search-bar{
+    width: 213px !important;
+    margin-left: 255px!important;
+  }
+}
+.main-heading {
+  color: #0B233A;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.main-heading span {
+  color: #11a4d0;
+}
+
+.second-row{
+  border:2px solid red;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background: blue;
+}
+
+/* .search-container {
+  position: relative; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.myform{
+  position: absolute;
+  top: -15%;
+  left: 52%;
+}
+.main-container{
+  max-height: 90vh !important;
+}
+
+
+
+.search-container {
+  position: relative; /* Parent container for positioning */
+  display: flex;
+  align-items: center;
+  width: 153%;
+  max-width: 400px; /* Adjust width if needed */
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 15px 12px 25px; /* Space for text */
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  background: #0b233a;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Cursor aligned to the left */
+  padding-right: 50px; /* Space for the search icon on the right */
+}
+
+/* Placeholder style */
+.search-bar::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+/* Search icon positioned correctly */
+.search-icon {
+  position: absolute;
+  top: 10px;
+  right: 25px; /* Move the icon to the right */
+  color: white;
+  font-size: 20px;
+  cursor: pointer; /* Make it clickable */
+  pointer-events: auto; /* Allows clicking */
+  z-index: 10;
+}
+
+
+
+
+
+
+/* Hide scrollbar without disabling scrolling */
+body, html {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+/*  */
+
+.microbiome{
+margin-top:120px;
+margin-left: 75px;
+width: 40rem;
+}
+.newform{
+  max-height: 70vh;
+  min-height: auto;
+  /* overflow: auto; */
+  justify-content: flex-start;
+}
+/* style={{ background: "black", width: "200px",height:"50px"}} */
+.fsdiv{
+  padding-left: 10px;
+  background: #e2e2e2;
+  border-radius: 5px;
+  display: flex;
+  flex-direction:row;
+  /* justify-content: center; */
+  align-items: center;
+}
+.fsdiv input{
+  width: 100px;
+}
+.myindex {
+  position: absolute;
+  top: 10%;
+  left: 67%;
+  gap: 50px;
+}
+@media screen and (max-width: 868px) {
+  .myindex {
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+    text-align: center; /* Center the text */
+  }
+  .search-bar {
+    margin-left: 100px; /* Add left margin to the search bar */
+  }
+  .search-icon{
+    right: -20px;
+  }
+  .main-heading{
+    font-size: 35px;
+  }
+  .mybutton{
+    margin-bottom: 15px;
+  }
+
+}
+
+@media screen and (max-width: 468px) {
+  
+  .search-bar {
+    margin-left: 100px; /* Add left margin to the search bar */
+  }
+
+}
+
+@media screen and (max-width: 968px) {
+  .mainformdiv{
+    max-height: 50vh;
+    align-items: flex-start;
+  }
+  form div input, select{
+    height: 30px;
+  }
+  form{
+    gap: 10px;
+  }
+
+}
+
+@media screen and (max-width:1064px) {
+  .myimage{
+    position: absolute;
+    display: block;
+    bottom: -150px;
+  }
+  body, html {
+    overflow-x: hidden!important; /* Prevent horizontal scrolling */
+  overflow-y: auto!important; /* Allow vertical scrolling */
+  height: auto!important; /* Let content define the height */
+  margin: 0!important;
+  padding: 0!important;
+    scrollbar-width: thin!important; 
+    scrollbar-color: #0B233A #E2E2E2!important;
+  }
+  .first-row{
+    margin-bottom: 110px!important;
+  }
+}
