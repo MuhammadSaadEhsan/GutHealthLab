@@ -85,8 +85,8 @@ const [submitted, setSubmitted] = useState(false);
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/submitformdata`, requestOptions);
                 const result = await response.text();
-                message.success(result);
-                navigate("/thank-you");
+                message.success("Form Submitted Successfully");
+                // navigate("/thank-you");
             } catch (error) {
                 console.error("Error submitting data:", error);
             }

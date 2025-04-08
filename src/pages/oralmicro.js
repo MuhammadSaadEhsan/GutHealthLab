@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import Home from "../Components/home";
 import Thankyou from "./thankyou";
 
-function Fsform() {
+function OralMicrobiome() {
   useEffect(() => {
-    document.title = "GutHealthlab Food Sensitivity Form";
+    document.title = "GutHealthlab Oral Microbiome Form";
   }, []);
 
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ setSubmitted(true)
     urlencoded.append("sampledate", formData.sampledate); // Changed `date` to `sampledate`
     urlencoded.append("KitCode", formData.barcode); // Changed `barcode` to `KitCode`
     urlencoded.append("DOB", formData.dob); // Added Date of Birth field
-    urlencoded.append("type", "FoodSensitivityMap"); // Dynamic test type selection
+    urlencoded.append("type", "OralMicrobiome"); // Dynamic test type selection
     urlencoded.append("formtype", "White-label"); // Fixed formtype value
 
     const requestOptions = {
@@ -109,7 +109,7 @@ setSubmitted(true)
           style={{ flexDirection: "column", marginTop: "-30px" }}
         >
           <img src="" alt="" />
-          <h1 style={{ color: "#0B233A" }}>FoodSensitivityMap</h1>
+          <h1 style={{ color: "#0B233A" }}>Oral Microbiome</h1>
           <form onSubmit={submitData}>
             <div
               className="flexxx"
@@ -192,15 +192,15 @@ setSubmitted(true)
                   Barcode Number <span style={{ color: "red" }}>*</span>
                 </label>
                 <div className="fsdiv">
-                    <p>T4-</p>
+                    {/* <p>T4-</p> */}
                   <input
-                    type="number"
+                    type="text"
                     name="barcode"
                     required
-                    style={{ outline:"none" }}
+                    style={{ outline:"none",width:"100%" }}
                     value={formData.barcode}
                     onChange={handleInputChange2}
-                  />-YGM
+                  />
                 </div>
               </div>
               <div className="widhtttt">
@@ -277,4 +277,4 @@ setSubmitted(true)
   );
 }
 
-export default Fsform;
+export default OralMicrobiome;

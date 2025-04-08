@@ -222,7 +222,7 @@ function Form() {
       })
       .catch((error) => console.error(error));
     // console.log(formValues)
-    await link("/thankyou");
+    // await link("/thankyou");
     setTimeout(() => {
       hide(); // Call hide to stop the loading message
       message.success("Action completed successfully");

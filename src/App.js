@@ -76,6 +76,7 @@ import Thankyou3 from "./pages/thankyou3";
 import Fsform from "./pages/fsform";
 import Candida from "./pages/candida";
 import LabRecieved from "./pages/labRecieved";
+import OralMicrobiome from "./pages/oralmicro";
 
 // const Nav = () => {
 //   const navigate = useNavigate();
@@ -178,6 +179,7 @@ const AppContent = () => {
         <Route path="/parasitologyform" element={<Praform />} />
         <Route path="/candidaform" element={<Candida />} />
         <Route path="/labrecieved" element={<LabRecieved />} />
+        <Route path="/oralmicrobiomeform" element={<OralMicrobiome />} />
       </Routes>
     </>
   );

@@ -218,25 +218,7 @@ select {
   gap: 30px;
 }
 
-@media screen and (max-width: 1060px) {
-  .flexxx {
-    flex-direction: column;
-  }
-  .widhtttt {
-    width: 100%;
-  }
-  /* .maininedxdiv {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    justify-content: center;
-    width: 100%;
-} */
 
-  .mobbb {
-    flex-direction: column !important;
-  }
-}
 
 /* Basic Navbar Styling */
 .navbar {
@@ -286,39 +268,6 @@ select {
   background-color: #11A3CF;
 }
 
-/* Responsive Styling */
-@media screen and (max-width: 768px) {
-  .navbar {
-    background-color: #0B233A;
-    justify-content: space-between;
-  }
-  .hamburger {
-    display: block; /* Show hamburger button on small screens */
-  }
-
-  .nav-links {
-    display: none; /* Hide links by default */
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #0B233A;
-    padding: 20px 0;
-    gap: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  .nav-links.open {
-    display: flex; /* Show links when menu is open */
-  }
-
-  .nav-links button {
-    width: 100%;
-    text-align: left;
-    padding: 10px 15px;
-  }
-}
 
 .navbar {
   width: 90%;
@@ -435,72 +384,7 @@ select {
 }
 
 /* Apply 1rem padding when screen width is 936px or less */
-@media screen and (max-width: 936px) {
-  .first-row {
-    padding: 2.4rem;
-  }
-}
-@media screen and (max-width: 515px) {
-  .first-row {
-    flex-direction: column;
-    align-items: center; /* Center items for better mobile view */
-    text-align: center; /* Center text content */
-  }
-  .main-heading{
-    font-size: 0.5rem;
-  }
-  .search-heading{
-    font-size: 1.5rem;
-  }
-  .search-bar{
-    width: 50%;
-  }
-  .myform{
-    width: 100%;
-  }
-  .mainformdiv{
-    width: 90%;
-    margin-left: -150px;
-    /* margin-top: -100px; */
-    /* overflow: auto; */
-    height: 70vh;
-    min-height: auto;
-    margin-top: 100px;
-    justify-content: flex-start;
-     
-  }
-  body, html {
-    overflow-x: hidden!important; /* Prevent horizontal scrolling */
-  overflow-y: auto!important; /* Allow vertical scrolling */
-  height: auto!important; /* Let content define the height */
-  margin: 0!important;
-  padding: 0!important;
-    scrollbar-width: thin!important; 
-    scrollbar-color: #0B233A #E2E2E2!important;
-  }
-  .myform{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-  }
-  .fsform{
-    margin-top: 120px;
-  }
-  .microbiome{
-    width: 20rem !important;
-    margin-top: 35px !important;
-    margin-left: 20px !important;
-  }
-  .myimage{
-    position: absolute;
-    display: block;
-    bottom: 0px;
-  }
-  .search-bar{
-    width: 213px !important;
-    margin-left: 255px!important;
-  }
-}
+
 .main-heading {
   color: #0B233A;
   font-size: 3rem;
@@ -601,7 +485,7 @@ width: 40rem;
 .newform{
   max-height: 70vh;
   min-height: auto;
-  /* overflow: auto; */
+  overflow: auto;
   justify-content: flex-start;
 }
 /* style={{ background: "black", width: "200px",height:"50px"}} */
@@ -654,7 +538,7 @@ width: 40rem;
 
 @media screen and (max-width: 968px) {
   .mainformdiv{
-    max-height: 50vh;
+    /* max-height: 50vh; */
     align-items: flex-start;
   }
   form div input, select{
@@ -670,7 +554,7 @@ width: 40rem;
   .myimage{
     position: absolute;
     display: block;
-    bottom: -150px;
+    bottom: 0px!important;
   }
   body, html {
     overflow-x: hidden!important; /* Prevent horizontal scrolling */
@@ -683,5 +567,127 @@ width: 40rem;
   }
   .first-row{
     margin-bottom: 110px!important;
+  }
+}
+
+@media screen and (max-width: 1060px) {
+  .flexxx {
+    flex-direction: column;
+  }
+  .widhtttt {
+    width: 100%;
+  }
+  /* .maininedxdiv {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    width: 100%;
+} */
+
+  .mobbb {
+    flex-direction: column !important;
+  }
+}
+@media screen and (max-width: 936px) {
+  .first-row {
+    padding: 2.4rem;
+  }
+}
+@media screen and (max-width: 515px) {
+  
+.nomargin{
+  margin-bottom: 0px;
+}
+  .first-row {
+    flex-direction: column;
+    align-items: center; /* Center items for better mobile view */
+    text-align: center; /* Center text content */
+  }
+  .main-heading{
+    font-size: 0.5rem;
+  }
+  .search-heading{
+    font-size: 1.5rem;
+  }
+  .search-bar{
+    width: 50%;
+  }
+  .myform{
+    width: 100%;
+  }
+  .mainformdiv{
+    width: 90%;
+    margin-left: -150px;
+    /* margin-top: -100px; */
+    overflow: visible!important;
+    /* overflow: auto; */
+    height: 70vh;
+    min-height: auto;
+    justify-content: flex-start;
+     
+  }
+  body, html {
+    overflow-x: hidden!important; /* Prevent horizontal scrolling */
+  overflow-y: auto!important; /* Allow vertical scrolling */
+  height: auto!important; /* Let content define the height */
+  margin: 0!important;
+  padding: 0!important;
+    scrollbar-width: thin!important; 
+    scrollbar-color: #0B233A #E2E2E2!important;
+  }
+  .myform{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  .fsform{
+    margin-top: 120px;
+  }
+  .microbiome{
+    width: 20rem !important;
+    margin-top: 35px !important;
+    margin-left: 20px !important;
+  }
+  .myimage{
+    position: absolute;
+    display: block;
+    bottom: 0px;
+  }
+  .search-bar{
+    width: 213px !important;
+    margin-left: 255px!important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .navbar {
+    background-color: #0B233A;
+    justify-content: space-between;
+  }
+  .hamburger {
+    display: block; /* Show hamburger button on small screens */
+  }
+
+  .nav-links {
+    display: none; /* Hide links by default */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #0B233A;
+    padding: 20px 0;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links.open {
+    display: flex; /* Show links when menu is open */
+  }
+
+  .nav-links button {
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
   }
 }

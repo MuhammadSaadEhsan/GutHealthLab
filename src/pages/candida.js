@@ -52,8 +52,8 @@ function Candida() {
         requestOptions
       );
       const result = await response.text();
-      message.success(result);
-      navigate("/thank-you");
+      message.success("Form Submitted Successfully");
+      // navigate("/thank-you");
     } catch (error) {
       console.error("Error submitting data:", error);
     }
