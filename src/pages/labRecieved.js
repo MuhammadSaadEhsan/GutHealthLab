@@ -116,9 +116,11 @@ function LabReceived() {
         });
     };
 
+
+    const [loading, setloading] = useState(false)
     const submitData = async (e) => {
         e.preventDefault();
-
+      await  setloading(true)
         // Validate input
         if (!formData.qrCode) {
             message.error('QR Code is required');
@@ -133,19 +135,20 @@ function LabReceived() {
             method: 'POST',
             headers: myHeaders,
             body: JSON.stringify({
-                qrCode: formData.qrCode, // Send qrCode in request body
+                qrcode: formData.qrCode, // Send qrCode in request body
             }),
             redirect: 'follow',
         };
 
         // API URLs
-        const apiUrl1 = 'https://testforlife-a4b515517434.herokuapp.com/kitrecbyqr';
-        const apiUrl2 = `${process.env.REACT_APP_API_URL}/kitrecbyqr`;
+        // const apiUrl1 = 'https://testforlife-a4b515517434.herokuapp.com/kitrecbyqr';
+        // const apiUrl2 = `${process.env.REACT_APP_API_URL}/kitrecbyqr`;
+        const apiUrl2 = `${process.env.REACT_APP_API_URL}/t4kitsrec`;
 
         // Make requests to both APIs
         try {
             const responses = await Promise.all([
-                fetch(apiUrl1, requestOptions),
+                // fetch(apiUrl1, requestOptions),
                 fetch(apiUrl2, requestOptions),
             ]);
 
@@ -171,31 +174,41 @@ function LabReceived() {
             message.error('An error occurred while submitting the form');
             console.error(error);
         }
+       await setFormData({
+            qrCode: '', // Changed from kitid to qrCode to match the backend
+        });
+      await  setloading(false)
+
     };
 
     return (
         <div className='mainformdiv' style={{ flexDirection: 'column' }}>
 
-            <h1 style={{ color: '#0B233A' }}>Kit Received Form</h1>
-            <form onSubmit={submitData}>
-                <div className='flexxx' style={{ display: 'flex', width: '100%', justifyContent: "space-between" }}>
-                    <div className='widhtttt'>
-                        <label>Kit ID<span style={{ color: 'red' }}>*</span></label>
-                        <input
-                            type='text'
-                            name='qrCode' // Ensure name is qrCode
-                            style={{ width: '198%' }}
-                            required
-                            value={formData.qrCode}
-                            onChange={handleInputChange}
-                        />
+            {loading ? (<>
+            
+            <img src='loading.gif' width={"10%"}/>
+            </>) : (<>
+                <h1 style={{ color: '#0B233A' }}>Kit Received Form</h1>
+                <form onSubmit={submitData}>
+                    <div className='flexxx' style={{ display: 'flex', width: '100%', justifyContent: "space-between" }}>
+                        <div className='widhtttt' style={{width:'100%'}}>
+                            <label>Kit ID<span style={{ color: 'red' }}>*</span></label>
+                            <input
+                                type='text'
+                                name='qrCode' // Ensure name is qrCode
+                                style={{ width: '100%' }}
+                                required
+                                value={formData.qrCode}
+                                onChange={handleInputChange}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <button className='button2' type='submit'>SEND</button>
-                </div>
-            </form>
+                    <div>
+                        <button className='button2' type='submit'>SEND</button>
+                    </div>
+                </form>
+            </>)}
         </div>
     );
 }
