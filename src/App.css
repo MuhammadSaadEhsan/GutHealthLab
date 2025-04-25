@@ -149,7 +149,7 @@ nav {
   /* display: none !important; */
 }
 
-.mainformdiv {
+.mainformdiv,.kitrecieved {
   /* background-color: #76cf11; */
   margin-top: 0px;
   width: 100%;
@@ -566,7 +566,7 @@ width: 40rem;
     scrollbar-color: #0B233A #E2E2E2!important;
   }
   .first-row{
-    margin-bottom: 110px!important;
+    margin-bottom: 50px!important;
   }
 }
 
@@ -595,6 +595,19 @@ width: 40rem;
   }
 }
 @media screen and (max-width: 515px) {
+  .myform {
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    font-size: 10px;
+  }
+  .image-container {
+    width: 100%; 
+    position: relative;
+    top: -225px;
+  width: 100%; 
+  height: 100vh;
+  }
   
 .nomargin{
   margin-bottom: 0px;
@@ -605,7 +618,7 @@ width: 40rem;
     text-align: center; /* Center text content */
   }
   .main-heading{
-    font-size: 0.5rem;
+    font-size: 1.5rem;
   }
   .search-heading{
     font-size: 1.5rem;
@@ -624,8 +637,19 @@ width: 40rem;
     /* overflow: auto; */
     height: 70vh;
     min-height: auto;
-    justify-content: flex-start;
-     
+    justify-content: flex-start; 
+  }
+  .kitrecieved{
+    width: 100%;
+    /* margin-left: -150px; */
+    /* margin-top: -100px; */
+    overflow: visible!important;
+    /* overflow: auto; */
+    height: 70vh;
+    min-height: auto;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
   }
   body, html {
     overflow-x: hidden!important; /* Prevent horizontal scrolling */
@@ -638,16 +662,18 @@ width: 40rem;
   }
   .myform{
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 50%;
   }
   .fsform{
-    margin-top: 120px;
+    margin-top: 20px;
   }
   .microbiome{
     width: 20rem !important;
     margin-top: 35px !important;
     margin-left: 20px !important;
+    position: absolute;
+    top: 166px;
   }
   .myimage{
     position: absolute;
@@ -660,6 +686,11 @@ width: 40rem;
   }
 }
 @media screen and (max-width: 768px) {
+ 
+  
+  .myimage{
+    display: none;
+  }
   .navbar {
     background-color: #0B233A;
     justify-content: space-between;
@@ -691,3 +722,27 @@ width: 40rem;
     padding: 10px 15px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+
+.data{
+  height: 100vh;
+}
+
+

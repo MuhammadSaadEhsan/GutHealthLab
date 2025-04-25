@@ -106,7 +106,8 @@ setSubmitted(true)
       <div className="myform fsform">
         {!submitted ? <div
           className="mainformdiv"
-          style={{ flexDirection: "column", marginTop: "-30px" }}
+          // style={{ flexDirection: "column", marginTop: "-30px" }}
+          style={{ flexDirection: "column"}}
         >
           <img src="" alt="" />
           <h1 style={{ color: "#0B233A" }}>FoodSensitivityMap</h1>

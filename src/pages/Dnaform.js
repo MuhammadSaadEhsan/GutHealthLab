@@ -96,6 +96,7 @@ const [submitted, setSubmitted] = useState(false);
         <Home>
 <div className="myform">
 {!submitted ? <div className='mainformdiv' style={{ flexDirection: 'column' }}>
+{/* {!submitted ? <div className='mainformdiv' style={{ flexDirection: 'column' }}> */}
 
             <h1 style={{ color: '#0B233A' }}>DNAMap Genetic Test</h1>
             <form onSubmit={submitData} >

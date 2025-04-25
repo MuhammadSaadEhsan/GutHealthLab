@@ -51,7 +51,7 @@ export const menuItems = [
     key: "7",
     label: (
       <a  rel="noopener noreferrer" href="/labrecieved">
-        Kit Recieved
+        Kit Received
       </a>
     ),
   },

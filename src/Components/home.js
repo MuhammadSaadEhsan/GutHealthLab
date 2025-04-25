@@ -6,7 +6,7 @@ import { menuItems } from "../constants/menuItems"; // Import menu items
 
 const Home = (props) => {
   return (
-    <div className="">
+    <div className="data">
       <div className="first-row">
         <p className="main-heading">
           GutHealth<span>Lab</span>

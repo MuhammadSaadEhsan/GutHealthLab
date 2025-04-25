@@ -61,7 +61,9 @@ const Index = () => {
   return (
     <Home>
       <div className="myform myindex">
+        <div className="search-heading-container">
         <h1 className="search-heading">Register Your Kit</h1>
+        </div>
         <form className="search-container" style={{padding:"0px"}} onSubmit={handleSearch}>
           <FaSearch 
             className="search-icon"

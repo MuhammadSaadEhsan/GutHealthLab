@@ -401,7 +401,7 @@ function Form() {
             <>
               <form onSubmit={handleSubmit2}>
                 <div>
-                  <label>KIT ID</label>
+                  <label>KIT ID<span style={{ color: "red" }}>*</span></label>
                   <input
                     type="text"
                     name="kitId"
@@ -420,7 +420,7 @@ function Form() {
                   }}
                 >
                   <div style={{ width: "49%" }}>
-                    <label>First Name</label>
+                    <label>First Name<span style={{ color: "red" }}>*</span></label>
                     <input
                       type="text"
                       name="name"
@@ -430,7 +430,7 @@ function Form() {
                     />
                   </div>
                   <div style={{ width: "49%" }}>
-                    <label>Last Name</label>
+                    <label>Last Name<span style={{ color: "red" }}>*</span></label>
                     <input
                       type="text"
                       name="namel"
@@ -441,7 +441,7 @@ function Form() {
                   </div>
                 </div>
                 <div>
-                  <label>Email</label>
+                  <label>Email<span style={{ color: "red" }}>*</span></label>
                   <input
                     type="email"
                     name="email"

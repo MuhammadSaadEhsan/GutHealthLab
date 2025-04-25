@@ -182,7 +182,7 @@ function LabReceived() {
     };
 
     return (
-        <div className='mainformdiv' style={{ flexDirection: 'column' }}>
+        <div className='kitrecieved' style={{ flexDirection: 'column' }}>
 
             {loading ? (<>
             
