@@ -55,4 +55,12 @@ export const menuItems = [
       </a>
     ),
   },
+  {
+    key: "8",
+    label: (
+      <a  rel="noopener noreferrer" href="/registeryourkits">
+        Register Your Kits
+      </a>
+    ),
+  },
 ];
