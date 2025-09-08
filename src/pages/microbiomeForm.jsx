@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./register.css";
-
-// import "../pages/CSS/microbiomeForm.css";
-// import "../component/CSS/kitTable.css";
-// import "../component/CSS/microbiomeForm.css";
-
-
-import { m } from "framer-motion";
-
-
+import "../pages/CSS/microbiomeForm.css";
+import "../component/CSS/kitTable.css";
+import ThankYouModal from "../component/thankYouModal";
+// import { submitKitForm } from "../API/api";
 
 const MicrobiomeForm = () => {
   const [selected, setSelected] = useState([]);
-  const [kitTypes, setKitTypes] = useState([]);
   const [showThankYou, setShowThankYou] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-const oldkittypes = [
-  'Microbiome',
-  'MicrobiomePlus',
-  'MicrobiomeAdvanced',
-  'Parasitology Test',
-  'Food Sensitivtiy 100',
-  'Food Sensitivtiy 210'
-]
-
   useEffect(() => {
     if (showThankYou) {
       setTimeout(() => {
@@ -34,115 +17,19 @@ const oldkittypes = [
     }
   }, [showThankYou]);
 
-
-
-
-// Simple inline ThankYouModal
-function ThankYouModal({ isOpen, onClose, title, message }) {
-  if (!isOpen) return null;
-  return (
-    <div style={{
-      position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-      background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
-    }}>
-      <div style={{ background: '#fff', borderRadius: 12, padding: 32, minWidth: 320, boxShadow: '0 2px 16px #0002', textAlign: 'center' }}>
-        <h3 style={{ marginBottom: 12 }}>{title}</h3>
-        <p style={{ marginBottom: 24 }}>{message}</p>
-        <button onClick={onClose} style={{ padding: '8px 24px', borderRadius: 6, background: '#726BEA', color: '#fff', border: 'none', fontWeight: 600 }}>Close</button>
-      </div>
-    </div>
-  );
-}
-
-// Dummy fetchKittypes for now
-const fetchKittypes = async () => {
-  setKitTypes([
-    'Microbiome',
-    'MicrobiomePlus',
-    'MicrobiomeAdvanced',
-    'Parasitology Test',
-    'Food Sensitivtiy 100',
-    'Food Sensitivtiy 210',
-    'FoodSensitivityMap',
-    'OtherKitType1',
-    'OtherKitType2',
-  ]);
-};
-
-useEffect(()=>{
-  fetchKittypes();
-},[])
-
-  const [healthConditions, setHealthConditions] = useState
-  (
-    [
-    {
-      label: "Irritable Bowel Syndrome",
-      icon: "/image53.svg",
-      value: "irritable_bowel_syndrome",
-      selected: false,
-    },
-    {
-      label: "Inflammatory Bowel Disease",
-      icon: "/image53.svg",
-      value: "inflammatory_bowel_disease",
-      selected: false,
-    },
-    {
-      label: "Bloating / Gas issues",
-      icon: "/image53.svg",
-      value: "bloating_gas",
-      selected: false,
-    },
-    {
-      label: "I would like to lose weight",
-      icon: "/image53.svg",
-      value: "lose_weight",
-      selected: false,
-    },
-    {
-      label: "I would like to gain weight",
-      icon: "/image53.svg",
-      value: "gain_weight",
-      selected: false,
-    },
-    {
-      label: "Thyroid Conditions",
-      icon: "/image53.svg",
-      value: "thyroid",
-      selected: false,
-    },
-    {
-      label: "Heart / Cardiovascular problems",
-      icon: "/image53.svg",
-      value: "heart_problems",
-      selected: false,
-    },
-    {
-      label: "Skin Conditions",
-      icon: "/image53.svg",
-      value: "skin_conditions",
-      selected: false,
-    },
-    {
-      label: "Headaches / Migraines",
-      icon: "/image53.svg",
-      value: "migraines",
-      selected: false,
-    },
-    {
-      label: "Food Intolerances",
-      icon: "/image53.svg",
-      value: "food_intolerances",
-      selected: false,
-    },
+  const [healthConditions, setHealthConditions] = useState([
+    { label: "Irritable Bowel Syndrome", icon: "/image53.svg", value: "irritable_bowel_syndrome", selected: false },
+    { label: "Inflammatory Bowel Disease", icon: "/image53.svg", value: "inflammatory_bowel_disease", selected: false },
+    { label: "Bloating / Gas issues", icon: "/image53.svg", value: "bloating_gas", selected: false },
+    { label: "I would like to lose weight", icon: "/image53.svg", value: "lose_weight", selected: false },
+    { label: "I would like to gain weight", icon: "/image53.svg", value: "gain_weight", selected: false },
+    { label: "Thyroid Conditions", icon: "/image53.svg", value: "thyroid", selected: false },
+    { label: "Heart / Cardiovascular problems", icon: "/image53.svg", value: "heart_problems", selected: false },
+    { label: "Skin Conditions", icon: "/image53.svg", value: "skin_conditions", selected: false },
+    { label: "Headaches / Migraines", icon: "/image53.svg", value: "migraines", selected: false },
+    { label: "Food Intolerances", icon: "/image53.svg", value: "food_intolerances", selected: false },
     { label: "Arthritis", icon: "/image53.svg", value: "arthritis", selected: false },
-    {
-      label: "Sleep Problems",
-      icon: "/image53.svg",
-      value: "sleep_problems",
-      selected: false,
-    },
+    { label: "Sleep Problems", icon: "/image53.svg", value: "sleep_problems", selected: false },
     { label: "Diabetes", icon: "/image53.svg", value: "diabetes", selected: false },
   ]);
 
@@ -154,42 +41,12 @@ useEffect(()=>{
   ]);
 
   const [eatingHabits, setEatingHabits] = useState([
-    {
-      label: "Intermittent Fasting",
-      icon: "/image53.svg",
-      value: "intermittent_fasting",
-      selected: false
-    },
-    {
-      label: "High Protein",
-      icon: "/image53.svg",
-      value: "high_protein",
-      selected: false
-    },
-    {
-      label: "Low Protein",
-      icon: "/image53.svg",
-      value: "low_protein",
-      selected: false
-    },
-    {
-      label: "Ketogenic",
-      icon: "/image53.svg",
-      value: "ketogenic",
-      selected: false
-    },
-    {
-      label: "High Carbohydrate",
-      icon: "/image53.svg",
-      value: "high_carb",
-      selected: false
-    },
-    {
-      label: "Low Carbohydrate",
-      icon: "/image53.svg",
-      value: "low_carb",
-      selected: false
-    }
+    { label: "Intermittent Fasting", icon: "/image53.svg", value: "intermittent_fasting", selected: false },
+    { label: "High Protein", icon: "/image53.svg", value: "high_protein", selected: false },
+    { label: "Low Protein", icon: "/image53.svg", value: "low_protein", selected: false },
+    { label: "Ketogenic", icon: "/image53.svg", value: "ketogenic", selected: false },
+    { label: "High Carbohydrate", icon: "/image53.svg", value: "high_carb", selected: false },
+    { label: "Low Carbohydrate", icon: "/image53.svg", value: "low_carb", selected: false },
   ]);
   const [antibioticTaken, setAntibioticTaken] = useState("yes");
 
@@ -226,11 +83,9 @@ useEffect(()=>{
     heightUnit: "ft",
     gender: "male",
     country: "",
-    kitType: "microbiome",
     kitId: "",
     sampleDate: "",
   }
-
 
   const [formData, setFormData] = useState(initialFormState);
   const validateForm = () => {
@@ -272,44 +127,48 @@ useEffect(()=>{
 
     const payload = {
       ...formData,
-      kitId: formData.kitType === "food_sensitivity" ? `T4-${formData.kitId}-YGM` : formData.kitId,
       antibioticTaken,
       healthConditions: healthConditions.filter(h => h.selected).map(h => h.value),
       dietType: dietType.filter(d => d.selected).map(d => d.value),
       eatingHabits: eatingHabits.filter(e => e.selected).map(e => e.value),
     };
 
-    setShowThankYou(true);  // Show success modal
-    setFormData(initialFormState);
-    setHealthConditions([
-      { label: "Irritable Bowel Syndrome", icon: "/image53.svg", value: "irritable_bowel_syndrome", selected: false },
-      { label: "Inflammatory Bowel Disease", icon: "/image53.svg", value: "inflammatory_bowel_disease", selected: false },
-      { label: "Bloating / Gas issues", icon: "/image53.svg", value: "bloating_gas", selected: false },
-      { label: "I would like to lose weight", icon: "/image53.svg", value: "lose_weight", selected: false },
-      { label: "I would like to gain weight", icon: "/image53.svg", value: "gain_weight", selected: false },
-      { label: "Thyroid Conditions", icon: "/image53.svg", value: "thyroid", selected: false },
-      { label: "Heart / Cardiovascular problems", icon: "/image53.svg", value: "heart_problems", selected: false },
-      { label: "Skin Conditions", icon: "/image53.svg", value: "skin_conditions", selected: false },
-      { label: "Headaches / Migraines", icon: "/image53.svg", value: "migraines", selected: false },
-      { label: "Food Intolerances", icon: "/image53.svg", value: "food_intolerances", selected: false },
-      { label: "Arthritis", icon: "/image53.svg", value: "arthritis", selected: false },
-      { label: "Sleep Problems", icon: "/image53.svg", value: "sleep_problems", selected: false },
-      { label: "Diabetes", icon: "/image53.svg", value: "diabetes", selected: false },
-    ]);
-    setDietType([
-      { label: "Omnivore", icon: "/image53.svg", value: "omnivore", selected: false },
-      { label: "Vegetarian", icon: "/image53.svg", value: "vegetarian", selected: false },
-      { label: "Vegan", icon: "/image53.svg", value: "vegan", selected: false },
-      { label: "Pescetarian", icon: "/image53.svg", value: "pescatarian", selected: false },
-    ]);
-    setEatingHabits([
-      { label: "Intermittent Fasting", icon: "/image53.svg", value: "intermittent_fasting", selected: false },
-      { label: "High Protein", icon: "/image53.svg", value: "high_protein", selected: false },
-      { label: "Low Protein", icon: "/image53.svg", value: "low_protein", selected: false },
-      { label: "Ketogenic", icon: "/image53.svg", value: "ketogenic", selected: false },
-      { label: "High Carbohydrate", icon: "/image53.svg", value: "high_carb", selected: false },
-      { label: "Low Carbohydrate", icon: "/image53.svg", value: "low_carb", selected: false },
-    ]);
+    try {
+      setShowThankYou(true);  // Show success modal
+    //   const response = await submitKitForm(payload);  // Call your API function
+   setFormData(initialFormState)
+   setHealthConditions([
+    { label: "Irritable Bowel Syndrome", icon: "/image53.svg", value: "irritable_bowel_syndrome", selected: false },
+    { label: "Inflammatory Bowel Disease", icon: "/image53.svg", value: "inflammatory_bowel_disease", selected: false },
+    { label: "Bloating / Gas issues", icon: "/image53.svg", value: "bloating_gas", selected: false },
+    { label: "I would like to lose weight", icon: "/image53.svg", value: "lose_weight", selected: false },
+    { label: "I would like to gain weight", icon: "/image53.svg", value: "gain_weight", selected: false },
+    { label: "Thyroid Conditions", icon: "/image53.svg", value: "thyroid", selected: false },
+    { label: "Heart / Cardiovascular problems", icon: "/image53.svg", value: "heart_problems", selected: false },
+    { label: "Skin Conditions", icon: "/image53.svg", value: "skin_conditions", selected: false },
+    { label: "Headaches / Migraines", icon: "/image53.svg", value: "migraines", selected: false },
+    { label: "Food Intolerances", icon: "/image53.svg", value: "food_intolerances", selected: false },
+    { label: "Arthritis", icon: "/image53.svg", value: "arthritis", selected: false },
+    { label: "Sleep Problems", icon: "/image53.svg", value: "sleep_problems", selected: false },
+    { label: "Diabetes", icon: "/image53.svg", value: "diabetes", selected: false },
+  ])
+  setDietType([
+    { label: "Omnivore", icon: "/image53.svg", value: "omnivore", selected: false },
+    { label: "Vegetarian", icon: "/image53.svg", value: "vegetarian", selected: false },
+    { label: "Vegan", icon: "/image53.svg", value: "vegan", selected: false },
+    { label: "Pescetarian", icon: "/image53.svg", value: "pescatarian", selected: false },
+  ])
+  setEatingHabits([
+    { label: "Intermittent Fasting", icon: "/image53.svg", value: "intermittent_fasting", selected: false },
+    { label: "High Protein", icon: "/image53.svg", value: "high_protein", selected: false },
+    { label: "Low Protein", icon: "/image53.svg", value: "low_protein", selected: false },
+    { label: "Ketogenic", icon: "/image53.svg", value: "ketogenic", selected: false },
+    { label: "High Carbohydrate", icon: "/image53.svg", value: "high_carb", selected: false },
+    { label: "Low Carbohydrate", icon: "/image53.svg", value: "low_carb", selected: false },
+  ])
+    } catch (err) {
+      console.error("Form submit failed", err);
+    }
   };
 
 
@@ -320,7 +179,7 @@ useEffect(()=>{
           <div className="form-header-item extra"></div>
           <div className="form-header-item form-heading">
             {/* <h2 className="heading">GI Axis Form</h2> */}
-            <h2 className="heading" >Register your kit</h2>
+            <h2 className="heading">Register your kit</h2>
           </div>
           <div className="form-header-item logo-item">
             <img src="/GutMapDxLogo.png" alt="GutMapDx Logo" />
@@ -445,61 +304,17 @@ useEffect(()=>{
             </label>
           </div>
 
-          
-
-          
-
           <div className="input-container">
             <label className="mylabel short-label">
-              Kit Type
-              <select name="kitType"  required onChange={(e) => setFormData({ ...formData, kitType: e.target.value,kitId:'' })}>
-              <option value="" selected disabled >Please Select KIT Type</option>
-               {
-                kitTypes?.map((value,index)=>{
-                 if (oldkittypes.includes(value)) return null;
-                  return (<option key={index} value={value}>{value}</option>)
-                })
-               }
-              </select>
-            </label>
-
-            <label className="mylabel short-label">
               Kit ID
-              {/* {
-                kitTypes.map((value,index)=>{
-                 <> {value}</>
-                })
-               } */}
-              {formData.kitType === "FoodSensitivityMap" ? (
-                <div className="kitid-composite">
-                  <span className="kitid-prefix">T4-</span>
-                  <input
-                    type="number"
-                    name="kitId"
-                    className="kitid-input"
-                    placeholder="Kit-Code"
-                    // value={formData.kitId}
-                    value={formData.kitId.replace(/^T4-/, "").replace(/-YGM$/, "")} // 👈 only show middle part
-                    onChange={(e) => setFormData({ ...formData, kitId: `T4-${e.target.value.trim()}-YGM`  })}
-                  />
-                  <span className="kitid-suffix">-YGM</span>
-                </div>
-              ) : (
-                <input
-                  type="text"
-                  name="kitId"
-                  placeholder=""
-                  value={formData.kitId}
-                  onChange={(e) => setFormData({ ...formData, kitId: e.target.value })}
-                />
-              )}
+              <input type="text" name="kitId" placeholder=""
+                value={formData.kitId}
+                onChange={(e) => setFormData({ ...formData, kitId: e.target.value })} />
               {isSubmitted && errors.kitId && (
                 <div style={{ color: "#c62828", fontSize: "12px", marginTop: "4px" }}>{errors.kitId}</div>
               )}
             </label>
-          </div>
 
-          <div className="input-container">
             <label className="mylabel short-label">
               Sample Date
               <input type="date" name="sampleDate" placeholder=""
@@ -520,28 +335,6 @@ useEffect(()=>{
             <div className="checkbox-grid">
 
               {healthConditions.map((condition, index) => (
-                // <label
-                //   key={index}
-                //   className="checkbox-item custom-checkbox"
-                //   style={{
-                //     backgroundColor: condition.selected ? "#726BEA" : "#EEE4FF",
-                //     color: condition.selected ? "white" : "black",
-                //   }}
-                // >
-                //   {/* <span style={{ marginRight: "8px" }}>{condition.icon}</span> */}
-                //     <img src={`/microbiomeFormIcons/${condition.label.replace(/\//g, "").trim()}${condition.selected ? 2 : 1}.svg`} alt="" />
-                //   {/* <div style={{fontSize: condition.label.length>30 ? "9px":""}}>{condition.label}</div> */}
-                //   {condition.label}
-                //   <input
-                //     type="checkbox"
-                //     className="checkinput2"
-                //     name="healthConditions"
-                //     value={condition.value}
-                //     checked={condition.selected}
-                //     onChange={() => toggleSelect(condition.value)}
-                //   />
-                //   <span className="checkmark"></span>
-                // </label>
                 <label
                   key={index}
                   className="checkbox-item custom-checkbox"
@@ -587,7 +380,6 @@ useEffect(()=>{
                     color: condition.selected ? "white" : "black",
                   }}
                 >
-                  {/* <span className="checkbox-icon" style={{ marginRight: "8px" }}>{condition.icon}</span> */}
                   <img src={`/microbiomeFormIcons/${condition.label}${condition.selected ? 2 : 1}.svg`} alt="" />
                   {condition.label}
                   <input
@@ -619,7 +411,6 @@ useEffect(()=>{
                     color: condition.selected ? "white" : "black",
                   }}
                 >
-                  {/* <span style={{ marginRight: "8px" }}>{condition.icon}</span> */}
                   <img width={condition.label.includes('Ketogenic') || condition.label.includes('Low Carbohydrate') ? '20px' : ""} src={`/microbiomeFormIcons/${condition.label}${condition.selected ? 2 : 1}.svg`} alt="" />
                   {condition.label}
                   <input

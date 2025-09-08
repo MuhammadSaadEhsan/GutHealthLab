@@ -77,7 +77,9 @@ import Fsform from "./pages/fsform";
 import Candida from "./pages/candida";
 import LabRecieved from "./pages/labRecieved";
 import OralMicrobiome from "./pages/oralmicro";
-import Registerkits from "./pages/MicrobiomeForm";
+import MicrobiomeForm from "./pages/microbiomeForm";
+import NewMicrobiomeForm from "./pages/NewMicrobiomeForm";
+import NewMicrobiomeFormFull from "./pages/NewMicrobiomeForm.full";
 
 // const Nav = () => {
 //   const navigate = useNavigate();
@@ -181,7 +183,9 @@ const AppContent = () => {
         <Route path="/candidaform" element={<Candida />} />
         <Route path="/labrecieved" element={<LabRecieved />} />
         <Route path="/oralmicrobiomeform" element={<OralMicrobiome />} />
-  <Route path="/registeryourkits" element={<Registerkits />} />
+  <Route path="/registeryourkits" element={<MicrobiomeForm />} />
+  <Route path="/new-microbiome-form" element={<NewMicrobiomeForm />} />
+  <Route path="/new-microbiome-form-full" element={<NewMicrobiomeFormFull />} />
 
       </Routes>
     </>
