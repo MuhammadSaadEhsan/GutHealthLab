@@ -6,10 +6,15 @@
   background: #f4e9ff;
   max-height: 100vh;
   overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
-.new-microbiome-form-wrapper::-webkit-scrollbar { display: none; }
+
+.new-microbiome-form-wrapper::-webkit-scrollbar {
+  display: none;
+}
 
 .new-microbiome-form {
   background: #fff;
@@ -21,10 +26,15 @@
   box-shadow: 0 8px 48px 0 #bba6e633;
   max-height: 90vh;
   overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
-.new-microbiome-form::-webkit-scrollbar { display: none; }
+
+.new-microbiome-form::-webkit-scrollbar {
+  display: none;
+}
 
 .form-header-row {
   display: flex;
@@ -188,7 +198,13 @@
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   min-height: 52px;
 }
-.pill-checkbox input { position: absolute; opacity: 0; pointer-events: none; }
+
+.pill-checkbox input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .pill-checkbox .check-icon {
   display: flex;
   align-items: center;
@@ -202,9 +218,21 @@
   font-size: 14px;
   box-shadow: inset 0 0 0 2px #ddd2ff;
 }
-.pill-checkbox .pill-label { text-align: left; }
-.pill-checkbox.selected { background: #ede7ff; box-shadow: inset 0 0 0 1px #7c73f3; }
-.pill-checkbox.selected .check-icon { background: #6f66f0; color: #fff; box-shadow: none; }
+
+.pill-checkbox .pill-label {
+  text-align: left;
+}
+
+.pill-checkbox.selected {
+  background: #ede7ff;
+  box-shadow: inset 0 0 0 1px #7c73f3;
+}
+
+.pill-checkbox.selected .check-icon {
+  background: #6f66f0;
+  color: #fff;
+  box-shadow: none;
+}
 
 /* Pill toggle button to mimic reference chips with right switch */
 .pill-toggle {
@@ -273,7 +301,10 @@
 .button-group .pill-toggle {
   width: 100%;
 }
-.button-group .pill-checkbox { width: 100%; }
+
+.button-group .pill-checkbox {
+  width: 100%;
+}
 
 /* Reuse pill style for diet/eating buttons */
 .diet-btn {
@@ -358,7 +389,12 @@
   transition: background .2s, color .2s, box-shadow .2s, transform .1s;
 }
 
-.antibiotic-pill input { position: absolute; opacity: 0; pointer-events: none; }
+.antibiotic-pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .antibiotic-pill .check-icon {
   display: inline-flex;
   align-items: center;
@@ -387,7 +423,12 @@
   color: #fff;
   box-shadow: 0 6px 18px rgba(124, 115, 243, 0.35);
 }
-.antibiotic-pill.selected .check-icon { background: #5f56e8; color: #fff; box-shadow: none; }
+
+.antibiotic-pill.selected .check-icon {
+  background: #5f56e8;
+  color: #fff;
+  box-shadow: none;
+}
 
 .antibiotic-pill.no {
   background: #efeaff;
