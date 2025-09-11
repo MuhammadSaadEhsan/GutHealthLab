@@ -77,7 +77,7 @@ import Fsform from "./pages/fsform";
 import Candida from "./pages/candida";
 import LabRecieved from "./pages/labRecieved";
 import OralMicrobiome from "./pages/oralmicro";
-import MicrobiomeForm from "./pages/microbiomeForm";
+// import MicrobiomeForm from "./pages/microbiomeForm";
 import NewMicrobiomeForm from "./pages/NewMicrobiomeForm";
 import NewMicrobiomeFormFull from "./pages/NewMicrobiomeForm.full";
 
@@ -173,19 +173,19 @@ const AppContent = () => {
       {!hideNavRoutes.includes(location.pathname)}
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/form" element={<Form />} />
+        <Route path="/form" element={<NewMicrobiomeFormFull />} />
         <Route path="/thankyou" element={<Thankyou />} />
         <Route path="/thank-you" element={<Thankyou2 />} />
-        <Route path="/thank-youu" element={<Thankyou3 />} />
-        <Route path="/dnaform" element={<Dnaform />} />
-        <Route path="/foodsensitivityform" element={<Fsform />} />
-        <Route path="/parasitologyform" element={<Praform />} />
-        <Route path="/candidaform" element={<Candida />} />
+        <Route path="/thank-youu" element={<NewMicrobiomeFormFull />} />
+        <Route path="/dnaform" element={<NewMicrobiomeFormFull />} />
+        <Route path="/foodsensitivityform" element={<NewMicrobiomeFormFull />} />
+        <Route path="/parasitologyform" element={<NewMicrobiomeFormFull />} />
+        <Route path="/candidaform" element={<NewMicrobiomeFormFull />} />
         <Route path="/labrecieved" element={<LabRecieved />} />
-        <Route path="/oralmicrobiomeform" element={<OralMicrobiome />} />
-  <Route path="/registeryourkits" element={<MicrobiomeForm />} />
+        <Route path="/oralmicrobiomeform" element={<NewMicrobiomeFormFull />} />
+  
   <Route path="/new-microbiome-form" element={<NewMicrobiomeForm />} />
-  <Route path="/new-microbiome-form-full" element={<NewMicrobiomeFormFull />} />
+  <Route path="/registeryourkits" element={<NewMicrobiomeFormFull />} />
 
       </Routes>
     </>
