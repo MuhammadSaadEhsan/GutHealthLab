@@ -135,7 +135,7 @@ const MicrobiomeForm = () => {
 
     try {
       setShowThankYou(true);  // Show success modal
-    //   const response = await submitKitForm(payload);  // Call your API function
+      const response = await submitKitForm(payload);  // Call your API function
    setFormData(initialFormState)
    setHealthConditions([
     { label: "Irritable Bowel Syndrome", icon: "/image53.svg", value: "irritable_bowel_syndrome", selected: false },
