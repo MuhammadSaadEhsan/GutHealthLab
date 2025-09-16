@@ -275,6 +275,7 @@ const submitKitForm = async (data) => {
           )}</div>
           <div className="form-group sampledate-group"><label>Sample Date</label><input name="sampleDate" type="date" value={formData.sampleDate} onChange={handleChange} required /></div>
         </div>
+        {formData.kitType !== 'DNA' && <>
         <div className="section">
           <label>Do you have any of the below health conditions or concerns?</label>
           {errors.health && <div className="error-text">{errors.health}</div>}
@@ -345,7 +346,12 @@ const submitKitForm = async (data) => {
             </div>
             <button type="submit" className="inline-submit">Submit</button>
           </div>
-        </div>
+        </div></>}
+        { formData.kitType === "DNA"  &&  <div className="submit-section full-width " style={{marginTop:"60px",width:"auto"}}>
+                <button type="submit" className="submit-btn inline-submit" style={{width:"100%"}}>
+                  Submit
+                </button>
+              </div>}
       </form>
        <ThankYouModal
           isOpen={showThankYou}
