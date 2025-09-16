@@ -536,9 +536,8 @@ width: 40rem;
 
 }
 
-@media screen and (max-width: 968px) {
+/* @media screen and (max-width: 968px) {
   .mainformdiv{
-    /* max-height: 50vh; */
     align-items: flex-start;
   }
   form div input, select{
@@ -547,8 +546,7 @@ width: 40rem;
   form{
     gap: 10px;
   }
-
-}
+} */
 
 @media screen and (max-width:1064px) {
   .myimage{

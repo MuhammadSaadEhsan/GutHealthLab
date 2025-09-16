@@ -651,7 +651,7 @@
 
 @media (max-width: 700px) {
   .new-microbiome-form {
-    padding: 12px 2px;
+    /* padding: 12px 2px; */
     min-width: 0;
   }
 
@@ -693,5 +693,20 @@
 
   .form-header-row h2 {
     font-size: 1.6rem;
+  }
+}
+
+
+
+
+@media (max-width: 524px) {
+.antibiotic-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 50px;
+  }
+  .inline-submit{
+    width: 100%;
   }
 }

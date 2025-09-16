@@ -33,6 +33,7 @@ import { FaSearch } from "react-icons/fa";
 import Home from "../Components/home";
 import { menuItems } from "../constants/menuItems";
 import "../App.css"; 
+import { message } from "antd";
 
 const Index = () => {
   const [query, setQuery] = useState("");
@@ -54,7 +55,8 @@ const Index = () => {
     if (matchedItem) {
       navigate(matchedItem.label.props.href);
     } else {
-      alert("No matching test found. Please try again.");
+      // alert("No matching test found. Please try again.");
+      message.error("No matching found. Please try again.");
     }
   };
 
