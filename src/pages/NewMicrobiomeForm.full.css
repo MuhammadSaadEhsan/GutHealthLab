@@ -145,7 +145,7 @@
 /* Laptops around 1366px wide: switch to 3 columns to avoid crowding */
 @media (max-width: 1360px) {
   .form-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, fr);
   }
   .form-grid > .form-group {
     grid-row: auto;
@@ -171,7 +171,7 @@
 
 @media (max-width: 1200px) {
   .form-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, fr);
   }
 
   /* Allow the grid to auto-flow vertically at this breakpoint */
@@ -214,7 +214,7 @@
 
 .form-group input,
 .form-group select {
-  padding: 12px 16px;
+  padding: 5px 16px;
   border-radius: 10px;
   border: none;
   background: #dcf0ff;
@@ -569,6 +569,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: background .2s, color .2s, box-shadow .2s, transform .1s;
+      margin-left: 8px;
+    margin-bottom: 6px;
 }
 
 .antibiotic-pill input {
@@ -628,7 +630,7 @@
 
   .form-grid,
   .checkbox-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, fr);
   }
 
   .button-group {

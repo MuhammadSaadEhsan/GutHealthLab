@@ -1,0 +1,120 @@
+
+.sample-return-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: #f7f7fa;
+  overflow: hidden;
+}
+
+.sample-return-form {
+  scrollbar-width: none;
+  background: #fff;
+  padding: 2.5rem 3.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(112, 79, 160, 0.15);
+  max-width: 60%;
+  margin-top: 0%;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #8dccff #f3f0fa;
+}
+
+.sample-return-form h2 {
+  text-align: center;
+  color:    #0d2339;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.sample-return-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #070707;
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+}
+
+.sample-return-form input,
+.sample-return-form textarea {
+  margin-top: 0.4rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #6dc2fc;
+  font-size: 1.08rem;
+  background: #dcf0ff;
+  transition: border 0.2s;
+}
+
+.sample-return-form input:focus,
+.sample-return-form textarea:focus {
+  border-color: #8dccff;
+  outline: none;
+}
+
+.sample-return-form textarea {
+  resize: vertical;
+  min-height: 40px;
+  max-height: 120px;
+}
+
+.sample-return-form button {
+  background: #8dccff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+
+.sample-return-form button:hover {
+  background: #8dccff;
+}
+
+.error {
+  color: #c62828;
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+.success {
+  color: #388e3c;
+  font-size: 1.08rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.info-note {
+  font-size: 0.98rem;
+  color: #121313;
+  background: #eff6fa;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.sample-return-form::-webkit-scrollbar {
+  width: 8px;
+}
+.sample-return-form::-webkit-scrollbar-thumb {
+  background: #704fa0;
+  border-radius: 8px;
+}
+.sample-return-form::-webkit-scrollbar-track {
+  background: #f3f0fa;
+  border-radius: 8px;
+}

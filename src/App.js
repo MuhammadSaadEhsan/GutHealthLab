@@ -80,6 +80,7 @@ import OralMicrobiome from "./pages/oralmicro";
 // import MicrobiomeForm from "./pages/microbiomeForm";
 import NewMicrobiomeForm from "./pages/NewMicrobiomeForm";
 import NewMicrobiomeFormFull from "./pages/NewMicrobiomeForm.full";
+import SampleReturnForm from "./pages/SampleReturnForm";
 
 // const Nav = () => {
 //   const navigate = useNavigate();
@@ -187,6 +188,7 @@ const AppContent = () => {
   <Route path="/new-microbiome-form" element={<NewMicrobiomeForm />} />
   <Route path="/registeryourkits" element={<NewMicrobiomeFormFull />} />
 
+        <Route path="/samplereturn" element={<SampleReturnForm />} />
       </Routes>
     </>
   );
