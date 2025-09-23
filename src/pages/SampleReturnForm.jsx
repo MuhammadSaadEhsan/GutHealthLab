@@ -107,27 +107,27 @@ export default function SampleReturnForm() {
       <form className="sample-return-form" onSubmit={handleSubmit}>
         <h2>Sample Return Form</h2>
         <label>
-          First Name<span className="required">*</span>
+          First Name<span className="required"></span>
           <input type="text" name="Name" value={form.Name} onChange={handleChange} placeholder="First Name" />
           {errors.Name && <div className="error">{errors.Name}</div>}
         </label>
         <label>
-          Last Name<span className="required">*</span>
+          Last Name<span className="required"></span>
           <input type="text" name="lName" value={form.lName} onChange={handleChange} placeholder="Last Name" />
           {errors.lName && <div className="error">{errors.lName}</div>}
         </label>
         <label>
-          Kit Code(s)<span className="required">*</span>
+          Kit Code(s)<span className="required"></span>
           <textarea name="KitCodes" value={form.KitCodes} onChange={handleChange} placeholder="Kit Codes" rows={2} />
           {errors.KitCodes && <div className="error">{errors.KitCodes}</div>}
         </label>
         <label>
-          Your Email<span className="required">*</span>
+          Your Email<span className="required"></span>
           <input type="email" name="Email" value={form.Email} onChange={handleChange} placeholder="Email" />
           {errors.Email && <div className="error">{errors.Email}</div>}
         </label>
         <label>
-          Your Address<span className="required">*</span>
+          Your Address<span className="required"></span>
           <textarea name="address" value={form.address} onChange={handleChange} placeholder="Address" rows={2} />
           {errors.address && <div className="error">{errors.address}</div>}
         </label>
@@ -136,7 +136,7 @@ export default function SampleReturnForm() {
           <input type="text" name="StreetAddress" value={form.StreetAddress} onChange={handleChange} placeholder="Street Address" />
         </label>
         <label>
-          Country<span className="required">*</span>
+          Country<span className="required"></span>
           <select name="Country" value={form.Country} onChange={handleChange}>
             <option value="">Select Country</option>
             {countries.map((item, idx) => (
@@ -146,12 +146,12 @@ export default function SampleReturnForm() {
           {errors.Country && <div className="error">{errors.Country}</div>}
         </label>
         <label>
-          Postal / ZIP code<span className="required">*</span>
+          Postal / ZIP code<span className="required"></span>
           <input type="text" name="Postal" value={form.Postal} onChange={handleChange} placeholder="Postal / ZIP code" />
           {errors.Postal && <div className="error">{errors.Postal}</div>}
         </label>
         <label>
-          Contact telephone number<span className="required">*</span> (include international dialing code)
+          Contact telephone number<span className="required"></span> (include international dialing code)
           <input type="text" name="Phone" value={form.Phone} onChange={handleChange} placeholder="Phone" />
           {errors.Phone && <div className="error">{errors.Phone}</div>}
         </label>

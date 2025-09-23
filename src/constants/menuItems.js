@@ -63,4 +63,12 @@ export const menuItems = [
       </a>
     ),
   },
+  {
+    key: "9",
+    label: (
+      <a  rel="noopener noreferrer" href="/samplereturn">
+        Sample Return Form
+      </a>
+    ),
+  },
 ];
