@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SampleReturnForm.css";
+import Select from "react-select";
 
 const initialFormState = {
   Name: "",
@@ -13,6 +14,7 @@ const initialFormState = {
   address: "",
   StreetAddress: "",
   Postal: "",
+  countryOptions: [],
 };
 
 export default function SampleReturnForm() {
@@ -20,6 +22,7 @@ export default function SampleReturnForm() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [countries, setCountries] = useState([]);
+  const [countryOptions, setCountryOptions] = useState([]);
   const [btn, setBtn] = useState(true);
   useEffect(() => {
     const fetchCountries = async () => {
@@ -29,6 +32,9 @@ export default function SampleReturnForm() {
           a.name.common.localeCompare(b.name.common)
         );
         setCountries(sortedCountries);
+        setCountryOptions(
+          sortedCountries.map((item) => ({ value: item.name.common, label: item.name.common }))
+        );
       } catch (error) {
         console.error('Error fetching countries:', error);
       }
@@ -49,7 +55,7 @@ export default function SampleReturnForm() {
     if (!form.Email.trim()) newErrors.Email = "Email is required";
     if (!form.address.trim()) newErrors.address = "Address is required";
     if (!form.Country.trim()) newErrors.Country = "Country is required";
-    if (!form.Postal.trim()) newErrors.Postal = "Postal / ZIP code is required";
+    if (!form.Country || form.Country.trim() === "") newErrors.Country = "Country is required";
     if (!form.Phone.trim()) newErrors.Phone = "Phone is required";
     return newErrors;
   };
@@ -77,7 +83,7 @@ export default function SampleReturnForm() {
     urlencoded2.append("Email", form.Email);
     urlencoded2.append("Phone", form.Phone);
     urlencoded2.append("Country", form.Country);
-    urlencoded2.append("address", form.address);
+    urlencoded2.append("Country", form.Country ? form.Country : "");
     urlencoded2.append("StreetAddress", form.StreetAddress);
     urlencoded2.append("Postal", form.Postal);
 
@@ -137,12 +143,20 @@ export default function SampleReturnForm() {
         </label>
         <label>
           Country<span className="required"></span>
-          <select name="Country" value={form.Country} onChange={handleChange}>
-            <option value="">Select Country</option>
+          <input
+            type="text"
+            name="Country"
+            value={form.Country}
+            onChange={handleChange}
+            list="country-list"
+            placeholder="Type country"
+            autoComplete="off"
+          />
+          <datalist id="country-list">
             {countries.map((item, idx) => (
-              <option key={idx} value={item.name.common}>{item.name.common}</option>
+              <option key={idx} value={item.name.common} />
             ))}
-          </select>
+          </datalist>
           {errors.Country && <div className="error">{errors.Country}</div>}
         </label>
         <label>

@@ -68,7 +68,7 @@
 }
 
 .sample-return-form button {
-  background: #8dccff;
+  background: #0d2339;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -83,6 +83,7 @@
 
 .sample-return-form button:hover {
   background: #8dccff;
+    color: #0d2339;
 }
 
 .error {
