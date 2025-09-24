@@ -82,8 +82,7 @@ export default function SampleReturnForm() {
     urlencoded2.append("KitCodes", form.KitCodes);
     urlencoded2.append("Email", form.Email);
     urlencoded2.append("Phone", form.Phone);
-    urlencoded2.append("Country", form.Country);
-    urlencoded2.append("Country", form.Country ? form.Country : "");
+  urlencoded2.append("Country", form.Country);
     urlencoded2.append("StreetAddress", form.StreetAddress);
     urlencoded2.append("Postal", form.Postal);
 
@@ -93,7 +92,7 @@ export default function SampleReturnForm() {
       body: urlencoded2,
       redirect: 'follow'
     };
-
+    
     await fetch("https://yourgutmap-food-sensitivity-423a2af84621.herokuapp.com/samplereturn-form", requestOptions2)
       .then(response => response.text())
       .then(result => {
@@ -111,7 +110,7 @@ export default function SampleReturnForm() {
   return (
     <div className="sample-return-form-wrapper">
       <form className="sample-return-form" onSubmit={handleSubmit}>
-        <h2>Sample Return Form</h2>
+        <h2>International Sample Return Form</h2>
         <label>
           First Name<span className="required"></span>
           <input type="text" name="Name" value={form.Name} onChange={handleChange} placeholder="First Name" />

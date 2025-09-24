@@ -19,7 +19,7 @@ const Home = (props) => {
               }}
               placement="bottom"
             >
-              <Button className="mybutton">Forms ⋁</Button>
+                 <Button className="mybutton">Forms <span style={{fontSize: '0.8em', verticalAlign: 'middle', color:""}}>&#9660;</span></Button>
             </Dropdown>
           </Space>
         </Space>

@@ -1,3 +1,127 @@
+/* Ultra-small device breakpoints */
+@media (max-width: 400px) {
+  .sample-return-form {
+    width: 99vw;
+    padding: 0.7rem 0.2rem;
+    gap: 0.7rem;
+     max-width: 95% !important;
+  }
+  .sample-return-form h2 {
+    font-size: 1.1rem;
+  }
+  .sample-return-form label {
+    font-size: 0.95rem;
+  }
+  .sample-return-form input,
+  .sample-return-form textarea {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .sample-return-form button {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
+}
+
+
+
+@media (max-width: 300px) {
+  .sample-return-form {
+    width: 100%;
+    max-width: 95% !important;
+    padding: 0.3rem 0.1rem;
+    gap: 0.5rem;
+    background-color: #0d2339;
+  }
+  .sample-return-form h2 {
+    font-size: 0.9rem;
+  }
+  .sample-return-form label {
+    font-size: 0.85rem;
+  }
+  .sample-return-form input,
+  .sample-return-form textarea {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.3rem;
+  }
+  .sample-return-form button {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 200px) {
+  .sample-return-form {
+    width: 100%;
+    padding: 0.1rem 0;
+    gap: 0.3rem;
+    max-width: 95%;
+  }
+  .sample-return-form h2 {
+    font-size: 0.7rem;
+  }
+  .sample-return-form label {
+    font-size: 0.7rem;
+  }
+  .sample-return-form input,
+  .sample-return-form textarea {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.1rem;
+  }
+  .sample-return-form button {
+    font-size: 0.7rem;
+    padding: 0.3rem;
+  }
+}
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .sample-return-form-wrapper {
+    height: auto;
+    min-height: 100vh;
+    padding: 0;
+    width: 100vw;
+    overflow: auto;
+  }
+
+  .sample-return-form {
+    max-width: 100%;
+    width: 98vw;
+    padding: 1.2rem 0.5rem;
+    border-radius: 0;
+    box-shadow: none;
+    height: auto;
+    min-height: 100vh;
+    gap: 1rem;
+  }
+
+  .sample-return-form h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .sample-return-form label {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .sample-return-form input,
+  .sample-return-form textarea {
+    font-size: 1rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 6px;
+  }
+
+  .sample-return-form button {
+    font-size: 1rem;
+    padding: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .info-note {
+    font-size: 0.92rem;
+    padding: 0.5rem 0.7rem;
+  }
+}
 
 .sample-return-form-wrapper {
   display: flex;
@@ -12,10 +136,10 @@
 .sample-return-form {
   scrollbar-width: none;
   background: #fff;
-  padding: 2.5rem 3.5rem;
+  padding: 2.5rem 1.5rem;
   border-radius: 18px;
   box-shadow: 0 4px 32px rgba(112, 79, 160, 0.15);
-  max-width: 60%;
+  max-width: 70%;
   margin-top: 0%;
   width: 100%;
   height: 90vh;
