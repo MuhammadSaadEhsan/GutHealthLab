@@ -94,6 +94,7 @@
 import { message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BarcodeScannerInput from '../Components/BarcodeScannerInput';
 
 function LabReceived() {
 
@@ -192,6 +193,14 @@ function LabReceived() {
                 <form onSubmit={submitData}>
                     <div className='flexxx' style={{ display: 'flex', width: '100%', justifyContent: "space-between" }}>
                         <div className='widhtttt' style={{width:'100%'}}>
+                            <div style={{ marginBottom: 12 }}>
+                                <BarcodeScannerInput
+                                    onDetected={(code) => setFormData((prev) => ({ ...prev, qrCode: code }))}
+                                    singleScan={true}
+                                    barcodeTypes={["code_128", "ean", "upc", "code_39"]}
+                                    placeholder="Scan barcode or type manually..."
+                                />
+                            </div>
                             <label>Kit ID<span style={{ color: 'red' }}>*</span></label>
                             <input
                                 type='text'
