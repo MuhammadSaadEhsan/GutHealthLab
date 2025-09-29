@@ -197,7 +197,7 @@ function LabReceived() {
                                 <BarcodeScannerInput
                                     onDetected={(code) => setFormData((prev) => ({ ...prev, qrCode: code }))}
                                     singleScan={true}
-                                    barcodeTypes={["code_128", "ean", "upc", "code_39"]}
+                                    barcodeTypes={["code_128"]}
                                     placeholder="Scan barcode or type manually..."
                                 />
                             </div>
