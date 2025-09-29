@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Quagga from "@ericblade/quagga2";
+import { hover } from "framer-motion";
 
 function getReaderNamesFromTypes(barcodeTypes) {
 	if (!Array.isArray(barcodeTypes) || barcodeTypes.length === 0) {
@@ -145,14 +146,14 @@ const BarcodeScannerInput = ({
 		<div className={className}>
 			<div style={{ fontWeight: 600, color: "#0B233A", marginBottom: 6 }}>Barcode Scanner</div>
 			<div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 12 }}>
-				<input
+				{/* <input
 					ref={inputRef}
 					type="text"
 					value={codeValue}
 					onChange={(e) => setCodeValue(e.target.value)}
 					placeholder={placeholder}
 					style={{ flex: 1, padding: "8px 10px" }}
-				/>
+				/> */}
 				<button
 					type="button"
 					onClick={isScanning ? stopScanner : startScanner}
@@ -165,7 +166,10 @@ const BarcodeScannerInput = ({
 						borderRadius: 6,
 						cursor: "pointer",
 						fontWeight: 600,
-					}}
+						boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+					}
+					
+				}
 				>
 					{isScanning ? "Stop" : "Start"} Scan
 				</button>
@@ -175,7 +179,7 @@ const BarcodeScannerInput = ({
 				ref={previewRef}
 				style={{
 					width: "100%",
-					maxWidth: 640,
+					maxWidth: "40%",
 					aspectRatio: "4 / 3",
 					background: "#000",
 					position: "relative",

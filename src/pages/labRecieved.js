@@ -121,7 +121,7 @@ function LabReceived() {
     const [loading, setloading] = useState(false)
     const submitData = async (e) => {
         e.preventDefault();
-      await  setloading(true)
+        await setloading(true)
         // Validate input
         if (!formData.qrCode) {
             message.error('QR Code is required');
@@ -175,10 +175,10 @@ function LabReceived() {
             message.error('An error occurred while submitting the form');
             console.error(error);
         }
-       await setFormData({
+        await setFormData({
             qrCode: '', // Changed from kitid to qrCode to match the backend
         });
-      await  setloading(false)
+        await setloading(false)
 
     };
 
@@ -186,13 +186,13 @@ function LabReceived() {
         <div className='kitrecieved' style={{ flexDirection: 'column' }}>
 
             {loading ? (<>
-            
-            <img src='loading.gif' width={"10%"}/>
+
+                <img src='loading.gif' width={"10%"} />
             </>) : (<>
                 <h1 style={{ color: '#0B233A' }}>Kit Received Form</h1>
                 <form onSubmit={submitData}>
                     <div className='flexxx' style={{ display: 'flex', width: '100%', justifyContent: "space-between" }}>
-                        <div className='widhtttt' style={{width:'100%'}}>
+                        <div className='widhtttt' style={{ width: '100%' }}>
                             <div style={{ marginBottom: 12 }}>
                                 <BarcodeScannerInput
                                     onDetected={(code) => setFormData((prev) => ({ ...prev, qrCode: code }))}
@@ -201,6 +201,7 @@ function LabReceived() {
                                     placeholder="Scan barcode or type manually..."
                                 />
                             </div>
+                            
                             <label>Kit ID<span style={{ color: 'red' }}>*</span></label>
                             <input
                                 type='text'
