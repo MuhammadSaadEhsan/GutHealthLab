@@ -310,8 +310,25 @@ const oldkittypes = [
     e.preventDefault();
     setIsSubmitted(true);
 
+    const nextErrors = {
+      health:
+        formData.health.length === 0
+          ? "Please select at least one option."
+          : "",
+      diet: formData.diet ? "" : "Please select your diet type.",
+      eatingHabits:
+        formData.eatingHabits.length === 0
+          ? "Please select at least one eating habit."
+          : "",
+    };
+    let kitIdValue = formData.kitId;
+    if (formData.kitType === "FoodSensitivityMap") {
+      kitIdValue = `T4-${formData.kitId}-YGM`;
+    }
+
     const payload = {
       ...formData,
+      kitId: kitIdValue, // yahan modified value bhejein
       antibioticTaken,
       healthConditions: healthConditions
         .filter((h) => h.selected)
@@ -322,8 +339,10 @@ const oldkittypes = [
 
     try {
       setShowThankYou(true); // Show success modal
-      const response = await submitKitForm(payload);
+      // const response = await submitKitForm(payload);
+      console.log(payload); // ab yahan sahi value dikhegi
       setFormData(initialFormState);
+
       setHealthConditions([
         {
           label: "Irritable Bowel Syndrome",
