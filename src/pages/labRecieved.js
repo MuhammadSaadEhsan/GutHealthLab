@@ -95,6 +95,8 @@ import { message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BarcodeScannerInput from '../Components/BarcodeScannerInput';
+import Quagga from "@ericblade/quagga2";
+import { hover } from "framer-motion"; 
 
 function LabReceived() {
 
@@ -202,7 +204,7 @@ function LabReceived() {
                                 />
                             </div>
                             
-                            <label>Kit ID<span style={{ color: 'red' }}>*</span></label>
+                            {/* <label>Kit ID<span style={{ color: 'red' }}>*</span></label>
                             <input
                                 type='text'
                                 name='qrCode' // Ensure name is qrCode
@@ -210,13 +212,15 @@ function LabReceived() {
                                 required
                                 value={formData.qrCode}
                                 onChange={handleInputChange}
-                            />
+                            /> */}
                         </div>
+                        {/* Removed extra scan button, use BarcodeScannerInput's button only */}
+                        
                     </div>
 
-                    <div>
+                    {/* <div>
                         <button className='button2' type='submit'>SEND</button>
-                    </div>
+                    </div> */}
                 </form>
             </>)}
         </div>
