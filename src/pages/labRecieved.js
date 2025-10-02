@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BarcodeScannerInput from '../Components/BarcodeScannerInput';
 import Quagga from "@ericblade/quagga2";
-import { hover } from "framer-motion"; 
 
 function LabReceived() {
     useEffect(() => {
@@ -19,12 +18,11 @@ function LabReceived() {
     const [loading, setLoading] = useState(false);
     const isSubmittingRef = useRef(false);
 
-    // Handle manual input change
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    // Handle barcode scanner input change
+    const handleBarcodeChange = (code) => {
         setFormData({
             ...formData,
-            [name]: value,
+            qrCode: code,
         });
     };
 
@@ -89,40 +87,18 @@ function LabReceived() {
                     style={{ display: 'flex', width: '100%', justifyContent: "space-between" }}
                 >
                     <div className="widhtttt" style={{ width: '100%' }}>
-                        {/* Scanner */}
+                        {/* Barcode Scanner */}
                         <div style={{ marginBottom: 16 }}>
                             <BarcodeScannerInput
-                                onDetected={(code) => {
-                                    if (loading || isSubmittingRef.current) return;
-                                    setFormData((prev) => ({ ...prev, qrCode: code }));
-                                    // NOTE: if you want auto-submit on scan:
-                                    // submitDataLogic(code);
-                                }}
-                                singleScan={true}
-                                barcodeTypes={["code_128"]}
-                                placeholder="Scan barcode or type manually..."
+                                onDetected={handleBarcodeChange}  // When a barcode is detected, update the form data
+                                singleScan={true}  // Stop after the first scan
+                                barcodeTypes={["code_128"]}  // Define which barcode types you want to scan
+                                placeholder="Type Kit ID"  // Updated placeholder
+                                value={formData.qrCode}  // Controlled input value
+                                autoFocusInput={true}  // Auto-focus the input field
+                                className="barcode-input"
                             />
                         </div>
-
-                        {/* Manual Input */}
-                        <label style={{ fontWeight: 600, color: '#0B233A' }}>
-                            Kit ID<span style={{ color: 'red' }}>*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="qrCode"
-                            style={{
-                                width: '100%',
-                                padding: '10px 14px',
-                                border: '1px solid #ccc',
-                                borderRadius: 6,
-                                marginTop: 6,
-                            }}
-                            required
-                            value={formData.qrCode}
-                            onChange={handleInputChange}
-                            disabled={loading}
-                        />
                     </div>
                 </div>
 

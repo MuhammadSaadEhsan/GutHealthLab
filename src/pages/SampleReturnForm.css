@@ -77,7 +77,7 @@
 @media (max-width: 600px) {
   .sample-return-form-wrapper {
     height: auto;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding: 0;
     width: 100vw;
     overflow: auto;
@@ -86,11 +86,11 @@
   .sample-return-form {
     max-width: 100%;
     width: 98vw;
-    padding: 1.2rem 0.5rem;
+    /* padding: 1.2rem 0.5rem; */
     border-radius: 0;
     box-shadow: none;
     height: auto;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     gap: 1rem;
   }
 

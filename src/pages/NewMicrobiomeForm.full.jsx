@@ -340,7 +340,7 @@ const oldkittypes = [
     try {
       setShowThankYou(true); // Show success modal
       // const response = await submitKitForm(payload);
-      console.log(payload); // ab yahan sahi value dikhegi
+      // console.log(payload); // ab yahan sahi value dikhegi
       setFormData(initialFormState);
 
       setHealthConditions([
