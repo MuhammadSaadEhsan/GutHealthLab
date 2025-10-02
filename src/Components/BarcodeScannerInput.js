@@ -1,289 +1,261 @@
-import React, { useEffect, useRef, useState } from "react";
-import Quagga from "@ericblade/quagga2";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { BrowserMultiFormatReader } from "@zxing/browser";
+import { BarcodeFormat, DecodeHintType } from "@zxing/library";
 
-// Helper functions
-function toHex(str) {
-  return Array.from(str)
-    .map((c) => c.charCodeAt(0).toString(16).padStart(2, "0"))
-    .join(" ");
+// Map prop barcode types to ZXing formats
+function getFormatsFromTypes(barcodeTypes) {
+  const map = {
+    code_128: BarcodeFormat.CODE_128,
+    ean: BarcodeFormat.EAN_13,
+    ean_8: BarcodeFormat.EAN_8,
+    upc: BarcodeFormat.UPC_A,
+    upc_e: BarcodeFormat.UPC_E,
+    code_39: BarcodeFormat.CODE_39,
+    code_93: BarcodeFormat.CODE_93,
+    itf: BarcodeFormat.ITF,
+    codabar: BarcodeFormat.CODABAR,
+  };
+  if (!Array.isArray(barcodeTypes) || barcodeTypes.length === 0) {
+    return [
+      BarcodeFormat.CODE_128,
+      BarcodeFormat.EAN_13,
+      BarcodeFormat.EAN_8,
+      BarcodeFormat.UPC_A,
+      BarcodeFormat.UPC_E,
+      BarcodeFormat.CODE_39,
+    ];
+  }
+  return barcodeTypes.map((t) => map[t]).filter(Boolean);
 }
 
-function toBinaryString(str) {
-  return Array.from(str)
-    .map((c) => c.charCodeAt(0).toString(2).padStart(8, "0"))
-    .join(" ");
-}
-
-const BarcodeScannerInput = ({ placeholder = "Scan barcode or type manually", onDetected }) => {
-  const scannerRef = useRef(null);
+// BarcodeScannerInput Component
+const BarcodeScannerInput = ({
+  onDetected,
+  singleScan = true,
+  barcodeTypes = ["code_128"],
+  placeholder = "Scan barcode...",
+  autoFocusInput = true,
+  className = "",
+}) => {
   const [codeValue, setCodeValue] = useState("");
-  const [formatValue, setFormatValue] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [isScanning, setIsScanning] = useState(false);
+  const previewRef = useRef(null);
+  const videoRef = useRef(null);
+  const inputRef = useRef(null);
+  const detectedOnceRef = useRef(false);
+  const readerRef = useRef(null);
+  const stopFuncRef = useRef(null);
+  const lastCodeRef = useRef("");
 
-  const startScanner = () => {
-    setShowModal(true);
+  // Stop scanner function (defined early so it can be referenced below)
+  const stopScanner = useCallback(() => {
+    try {
+      if (stopFuncRef.current) {
+        stopFuncRef.current();
+      }
+      if (readerRef.current) {
+        readerRef.current.reset();
+      }
+      if (videoRef.current) {
+        try {
+          const mediaStream = videoRef.current.srcObject;
+          if (mediaStream && typeof mediaStream.getTracks === "function") {
+            mediaStream.getTracks().forEach((t) => t.stop());
+          }
+          // Detach stream from element
+          videoRef.current.srcObject = null;
+        } catch (_) {}
+      }
+    } catch (_) {}
+    setIsScanning(false);
+  }, []);
 
-    setTimeout(() => {
-      if (scannerRef.current) {
-        Quagga.init(
-          {
-            inputStream: {
-              type: "LiveStream",
-              target: scannerRef.current,
-              constraints: {
-                facingMode: "environment",
-                width: { min: 1280 },
-                height: { min: 720 },
-              },
-            },
-            locator: {
-              // Larger patch size improves stability on high-contrast labels like Code39
-              patchSize: "medium",
-              halfSample: true,
-            },
-            numOfWorkers: 0, // mobile safe
-            decoder: {
-              // Focus on formats that support letters and hyphens
-              readers: [
-                {
-                  format: "code_39_reader",
-                  config: {
-                    useCode39Extended: true, // allow full ASCII for Code 39 (includes '-','/','+' etc.)
-                  },
-                },
-                {
-                  format: "code_128_reader",
-                  config: {},
-                },
-                {
-                  format: "code_93_reader",
-                  config: {},
-                },
-              ],
-            },
-            locate: true,
-          },
-          (err) => {
-            if (err) {
-              console.error("Quagga init error:", err);
-              return;
-            }
-            Quagga.start();
+  // Handle barcode detection
+  const onDetectedHandler = useCallback(
+    (text, rawResult) => {
+      const detectedCode = text;
+      if (!detectedCode) return;
+
+      // Debounce duplicate consecutive frames
+      if (detectedCode === lastCodeRef.current) return;
+      lastCodeRef.current = detectedCode;
+
+      if (singleScan && detectedOnceRef.current) return;
+      detectedOnceRef.current = true;
+
+      setCodeValue(detectedCode);
+      if (typeof onDetected === "function") {
+        onDetected(detectedCode, rawResult);
+      }
+
+      // Auto-stop camera only when singleScan is true
+      if (singleScan) {
+        setTimeout(() => stopScanner(), 0);
+      }
+    },
+    [onDetected, singleScan, stopScanner]
+  );
+
+  // Initialize ZXing scanner
+  const startScanner = useCallback(async () => {
+    if (isScanning || !previewRef.current || !videoRef.current) return;
+
+    // Ensure any prior session is fully stopped and element is clean
+    try {
+      if (stopFuncRef.current) stopFuncRef.current();
+      if (readerRef.current) readerRef.current.reset();
+      if (videoRef.current) {
+        const prev = videoRef.current.srcObject;
+        if (prev && typeof prev.getTracks === "function") {
+          prev.getTracks().forEach((t) => t.stop());
+        }
+        videoRef.current.srcObject = null;
+      }
+    } catch (_) {}
+
+    detectedOnceRef.current = false;
+    lastCodeRef.current = "";
+
+    const formats = getFormatsFromTypes(barcodeTypes);
+    const hints = new Map();
+    hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
+
+    const reader = new BrowserMultiFormatReader(hints, 10);
+    readerRef.current = reader;
+
+    try {
+      // Prefer environment camera; provide reasonable HD constraints
+      const constraints = {
+        video: {
+          facingMode: { ideal: "environment" },
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          aspectRatio: { ideal: 1.777 },
+        },
+        audio: false,
+      };
+
+      // Prepare video element
+      const videoEl = videoRef.current;
+      videoEl.setAttribute("playsinline", "true");
+
+      const stop = await reader.decodeFromVideoDevice(
+        undefined,
+        videoEl,
+        (result, err, controls) => {
+          if (result) {
+            onDetectedHandler(result.getText(), result);
+          }
+        },
+        constraints
+      );
+      stopFuncRef.current = stop;
+      setIsScanning(true);
+      if (autoFocusInput && inputRef.current) inputRef.current.focus();
+    } catch (e) {
+      console.error("ZXing init error:", e);
+      try {
+        // Fallback without custom constraints
+        const stop = await reader.decodeFromVideoDevice(
+          undefined,
+          videoRef.current,
+          (result) => {
+            if (result) onDetectedHandler(result.getText(), result);
           }
         );
-
-        // 🔴🟢 Debug overlay
-        Quagga.onProcessed((result) => {
-          const ctx = Quagga.canvas.ctx.overlay;
-          const canvas = Quagga.canvas.dom.overlay;
-
-          if (result) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (result.boxes) {
-              result.boxes
-                .filter((box) => box !== result.box)
-                .forEach((box) => {
-                  Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, ctx, {
-                    color: "green",
-                    lineWidth: 2,
-                  });
-                });
-            }
-            if (result.box) {
-              Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, ctx, {
-                color: "red",
-                lineWidth: 3,
-              });
-            }
-          }
-        });
-
-        // ✅ On detection with quality + pattern filters to avoid numeric-only false positives
-        Quagga.onDetected((data) => {
-          const code = data?.codeResult?.code;
-          if (!code) return;
-
-          // Calculate average error from decoded codes (lower is better)
-          const errors = (data.codeResult.decodedCodes || [])
-            .filter((d) => d.error !== undefined)
-            .map((d) => d.error);
-          const avgError = errors.length
-            ? errors.reduce((a, b) => a + b, 0) / errors.length
-            : 0.0;
-
-          // Accept only reasonably confident reads
-          if (avgError > 0.15) return; // keep scanning
-
-          // If your kits follow patterns like "T4-0123456-", prefer those
-          const expectedLike = /^[A-Z][0-9]-?[0-9A-Z]+-?$/; // allows letters + hyphens
-          if (!expectedLike.test(code)) {
-            // If it is purely numeric and we expected alpha/hyphen, ignore
-            if (/^\d+$/.test(code)) return;
-          }
-
-          const detectedCode = code;
-          const format = (data.codeResult.format || "unknown").toUpperCase();
-
-          setCodeValue(detectedCode);
-          setFormatValue(format);
-
-          console.log("✅ Detected:", { format, value: detectedCode, avgError });
-
-          const payload = { format, value: detectedCode };
-          fetch("/api/save-scan", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          }).catch((err) => console.error("Backend error:", err));
-
-          if (typeof onDetected === "function") onDetected(payload);
-
-          Quagga.stop();
-          setShowModal(false);
-        });
+        stopFuncRef.current = stop;
+        setIsScanning(true);
+      } catch (e2) {
+        console.error("ZXing fallback error:", e2);
+        setIsScanning(false);
       }
-    }, 500);
-  };
-
-  const stopScanner = () => {
-    try {
-      Quagga.stop();
-    } catch (e) {
-      console.warn("Scanner already stopped");
     }
-  };
+  }, [barcodeTypes, isScanning, onDetectedHandler, autoFocusInput]);
 
   useEffect(() => {
     return () => {
-      stopScanner();
+      try {
+        if (stopFuncRef.current) stopFuncRef.current();
+        if (readerRef.current) readerRef.current.reset();
+      } catch (_) {}
     };
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      <label style={{ fontWeight: "600", marginBottom: "6px" }}>
-        Kit ID <span style={{ color: "red" }}>*</span>
-      </label>
+    <div className={className}>
+      <div style={{ fontWeight: 600, color: "#0B233A", marginBottom: 6 }}>
+        Barcode Scanner
+      </div>
 
-      <div style={{ display: "flex", marginBottom: "12px" }}>
+      {/* Input + Start Scan */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          width: "100%",
+          marginBottom: "12px",
+        }}
+      >
         <input
+          ref={inputRef}
           type="text"
           value={codeValue}
           onChange={(e) => setCodeValue(e.target.value)}
           placeholder={placeholder}
+          required
           style={{
             flex: 1,
-            padding: "10px",
+            padding: "10px 14px",
+            fontSize: "16px",
             border: "1px solid #ccc",
             borderRadius: "6px",
-            background: "#e6f3ff",
+            outline: "none",
           }}
         />
         <button
           type="button"
-          onClick={startScanner}
+          onClick={isScanning ? stopScanner : startScanner}
+          aria-label={isScanning ? "Stop Scan" : "Start Scan"}
           style={{
-            marginLeft: "12px",
             background: "#0B233A",
             color: "#fff",
-            borderRadius: "6px",
-            padding: "0 16px",
+            border: "none",
+            padding: "10px 14px",
+            borderRadius: 6,
+            cursor: "pointer",
+            fontWeight: 600,
+            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
           }}
         >
-          Start Scan
+          {isScanning ? "Stop" : "Start"} Scan
         </button>
       </div>
 
-      {/* ✅ Display Format + Raw + HEX + Binary under input */}
-      {codeValue && (
-        <div
-          style={{
-            marginTop: "12px",
-            padding: "10px",
-            background: "#f1f1f1",
-            borderRadius: "6px",
-            fontSize: "14px",
-          }}
-        >
-          <div><strong>Format:</strong> {formatValue}</div>
-          <div><strong>Raw:</strong> {codeValue}</div>
-          <div><strong>HEX:</strong> {toHex(codeValue)}</div>
-          <div><strong>Binary:</strong> {toBinaryString(codeValue)}</div>
-        </div>
-      )}
+      <div style={{ marginBottom: 12, color: "#555" }}>
+        Allow camera access and point at the barcode. Use HTTPS on mobile.
+      </div>
 
-      <button
-        type="submit"
-        disabled={!codeValue}
+      {/* Camera Preview */}
+      <div
+        ref={previewRef}
         style={{
-          background: !codeValue ? "#ccc" : "#0B233A",
-          color: "#fff",
-          borderRadius: "6px",
-          padding: "12px",
           width: "100%",
-          marginTop: "12px",
+          maxWidth: 400,
+          aspectRatio: "4 / 3",
+          background: "#000",
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: 8,
         }}
       >
-        SEND
-      </button>
-
-      {showModal && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "rgba(0,0,0,0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 9999,
-          }}
-        >
-          <div
-            style={{
-              background: "#fff",
-              borderRadius: "12px",
-              padding: "16px",
-              width: "90%",
-              maxWidth: "400px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              position: "relative",
-            }}
-          >
-            <div
-              ref={scannerRef}
-              style={{
-                width: "100%",
-                height: "300px",
-                borderRadius: "8px",
-                overflow: "hidden",
-                background: "#000",
-              }}
-            />
-            <button
-              type="button"
-              onClick={() => {
-                stopScanner();
-                setShowModal(false);
-              }}
-              style={{
-                marginTop: "12px",
-                background: "#0B233A",
-                color: "#fff",
-                borderRadius: "6px",
-                padding: "6px 16px",
-              }}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+        <video
+          ref={videoRef}
+          muted
+          autoPlay
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      </div>
     </div>
   );
 };
