@@ -30,8 +30,8 @@ function LabReceived() {
     const submitDataLogic = async (code) => {
         if (isSubmittingRef.current) return;
 
-        if (!code) {
-            message.error('QR Code is required');
+        if (!formData.qrCode) {
+            message.error('Kit ID is required');
             return;
         }
 
