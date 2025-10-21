@@ -37,6 +37,17 @@ const BarcodeScannerInput = ({
   const [practitionerName, setPractitionerName] = useState("");
   const [kitPrice, setKitPrice] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("Unpaid");
+  
+  // New state for table data and form management
+  const [kitEntries, setKitEntries] = useState([]);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // Practitioner names data - you can replace this with API call
+  const [practitionerNames] = useState([
+    "Dr. John Smith",
+    "Dr. Mac Smith",
+   
+  ]);
 
   const videoRef = useRef(null);
   const readerRef = useRef(null);
@@ -76,6 +87,72 @@ const BarcodeScannerInput = ({
     },
     [onDetected, singleScan, stopScanner]
   );
+
+  // Validate form function
+  const validateForm = useCallback(() => {
+    return (
+      codeValue.trim() !== "" &&
+      kitType.trim() !== "" &&
+      practitionerName.trim() !== "" &&
+      kitPrice.trim() !== "" &&
+      paymentStatus.trim() !== ""
+    );
+  }, [codeValue, kitType, practitionerName, kitPrice, paymentStatus]);
+
+  // Add entry to table
+  const addEntryToTable = () => {
+    if (!validateForm()) {
+      message.error("Please fill all fields before adding to table");
+      return;
+    }
+
+    const newEntry = {
+      id: Date.now(), // unique ID
+      kitId: codeValue,
+      kitType: kitType,
+      practitionerName: practitionerName,
+      kitPrice: `€ ${kitPrice}`,
+      paymentStatus: paymentStatus,
+    };
+
+    setKitEntries(prev => [...prev, newEntry]);
+    resetForm();
+    message.success("Kit added to table successfully!");
+  };
+
+  // Remove entry from table
+  const removeEntry = (id) => {
+    setKitEntries(prev => prev.filter(entry => entry.id !== id));
+  };
+
+  // Reset form fields
+  const resetForm = () => {
+    setCodeValue("");
+    setKitType("");
+    setPractitionerName("");
+    setKitPrice("");
+    setPaymentStatus("Unpaid");
+  };
+
+  // Send all data
+  const sendAllData = () => {
+    if (kitEntries.length === 0) {
+      message.error("No kit entries to send");
+      return;
+    }
+
+    // Here you can implement your API call or data submission logic
+    console.log("Sending all kit data:", kitEntries);
+    message.success(`${kitEntries.length} kit(s) sent successfully!`);
+    
+    // Clear table after sending
+    setKitEntries([]);
+  };
+
+  // Update form validation when fields change
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [validateForm]);
 
   useEffect(() => {
     if (!showModal || !videoRef.current) return;
@@ -205,7 +282,7 @@ const BarcodeScannerInput = ({
           </select>
         </div>
 
-        {/* Practitioner Name */}
+        {/* Practitioner Name - Changed to Dropdown */}
         <div
           style={{
             flex: "1 1 200px",
@@ -223,17 +300,23 @@ const BarcodeScannerInput = ({
           >
             Practitioner Name
           </label>
-          <input
-            type="text"
-            placeholder="Practitioner Name"
+          <select
             value={practitionerName}
             onChange={(e) => setPractitionerName(e.target.value)}
             style={{
               padding: "10px 14px",
               borderRadius: "6px",
               border: "1px solid #ccc",
+              outline: "none",
             }}
-          />
+          >
+            <option value="">Select Practitioner</option>
+            {practitionerNames.map((name, index) => (
+              <option key={index} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Kit Price */}
@@ -318,6 +401,147 @@ const BarcodeScannerInput = ({
           </select>
         </div>
       </div>
+
+      {/* Add to Table Button */}
+      <div style={{ marginTop: "20px", display: "flex", gap: "12px" }}>
+        <button
+          type="button"
+          onClick={addEntryToTable}
+          disabled={!isFormValid}
+          style={{
+            background: isFormValid ? "#28a745" : "#ccc",
+            color: "#fff",
+            border: "none",
+            padding: "12px 24px",
+            borderRadius: "6px",
+            cursor: isFormValid ? "pointer" : "not-allowed",
+            fontWeight: 600,
+            fontSize: "16px",
+          }}
+        >
+          Add to Table
+        </button>
+        
+        {kitEntries.length > 0 && (
+          <button
+            type="button"
+            onClick={sendAllData}
+            style={{
+              background: "#007bff",
+              color: "#fff",
+              border: "none",
+              padding: "12px 24px",
+              borderRadius: "6px",
+              cursor: "pointer",
+              fontWeight: 600,
+              fontSize: "16px",
+            }}
+          >
+            Send All ({kitEntries.length})
+          </button>
+        )}
+      </div>
+
+      {/* Kit Entries Table */}
+      {kitEntries.length > 0 && (
+        <div style={{ marginTop: "30px" }}>
+          <h3 style={{ color: "#0B233A", marginBottom: "15px" }}>
+            Kit Entries ({kitEntries.length})
+          </h3>
+          <div style={{ overflowX: "auto" }}>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              }}
+            >
+              <thead>
+                <tr style={{ backgroundColor: "#0B233A", color: "#fff" }}>
+                  <th style={{ padding: "12px", textAlign: "left", fontSize: "14px" }}>
+                    Kit ID
+                  </th>
+                  <th style={{ padding: "12px", textAlign: "left", fontSize: "14px" }}>
+                    Kit Type
+                  </th>
+                  <th style={{ padding: "12px", textAlign: "left", fontSize: "14px" }}>
+                    Practitioner Name
+                  </th>
+                  <th style={{ padding: "12px", textAlign: "left", fontSize: "14px" }}>
+                    Kit Price
+                  </th>
+                  <th style={{ padding: "12px", textAlign: "left", fontSize: "14px" }}>
+                    Payment Status
+                  </th>
+                  <th style={{ padding: "12px", textAlign: "center", fontSize: "14px" }}>
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {kitEntries.map((entry, index) => (
+                  <tr 
+                    key={entry.id}
+                    style={{
+                      backgroundColor: index % 2 === 0 ? "#f8f9fa" : "#fff",
+                      borderBottom: "1px solid #dee2e6",
+                    }}
+                  >
+                    <td style={{ padding: "12px", fontSize: "14px" }}>{entry.kitId}</td>
+                    <td style={{ padding: "12px", fontSize: "14px" }}>{entry.kitType}</td>
+                    <td style={{ padding: "12px", fontSize: "14px" }}>{entry.practitionerName}</td>
+                    <td style={{ padding: "12px", fontSize: "14px" }}>{entry.kitPrice}</td>
+                    <td style={{ padding: "12px", fontSize: "14px" }}>
+                      <span
+                        style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          fontSize: "12px",
+                          fontWeight: "600",
+                          backgroundColor:
+                            entry.paymentStatus === "Paid"
+                              ? "#d4edda"
+                              : entry.paymentStatus === "Pending"
+                              ? "#fff3cd"
+                              : "#f8d7da",
+                          color:
+                            entry.paymentStatus === "Paid"
+                              ? "#155724"
+                              : entry.paymentStatus === "Pending"
+                              ? "#856404"
+                              : "#721c24",
+                        }}
+                      >
+                        {entry.paymentStatus}
+                      </span>
+                    </td>
+                    <td style={{ padding: "12px", textAlign: "center" }}>
+                      <button
+                        type="button"
+                        onClick={() => removeEntry(entry.id)}
+                        style={{
+                          background: "#dc3545",
+                          color: "#fff",
+                          border: "none",
+                          padding: "6px 12px",
+                          borderRadius: "4px",
+                          cursor: "pointer",
+                          fontSize: "12px",
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Camera Modal */}
       {showModal && (
