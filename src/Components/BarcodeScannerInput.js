@@ -239,7 +239,7 @@ const BarcodeScannerInput = ({
       </div>
 
       {/* Extra Fields */}
-      <div
+      {/* <div
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -247,7 +247,6 @@ const BarcodeScannerInput = ({
           marginTop: "20px",
         }}
       >
-        {/* Kit Type */}
         <div
           style={{
             flex: "1 1 200px",
@@ -282,7 +281,6 @@ const BarcodeScannerInput = ({
           </select>
         </div>
 
-        {/* Practitioner Name - Changed to Dropdown */}
         <div
           style={{
             flex: "1 1 200px",
@@ -319,7 +317,6 @@ const BarcodeScannerInput = ({
           </select>
         </div>
 
-        {/* Kit Price */}
         <div
           style={{
             flex: "1 1 120px",
@@ -366,7 +363,6 @@ const BarcodeScannerInput = ({
           </div>
         </div>
 
-        {/* Payment Status */}
         <div
           style={{
             flex: "1 1 150px",
@@ -400,10 +396,10 @@ const BarcodeScannerInput = ({
             <option value="Pending">Pending</option>
           </select>
         </div>
-      </div>
+      </div> */}
 
       {/* Add to Table Button */}
-      <div style={{ marginTop: "20px", display: "flex", gap: "12px" }}>
+      {/* <div style={{ marginTop: "20px", display: "flex", gap: "12px" }}>
         <button
           type="button"
           onClick={addEntryToTable}
@@ -440,7 +436,7 @@ const BarcodeScannerInput = ({
             Send All ({kitEntries.length})
           </button>
         )}
-      </div>
+      </div> */}
 
       {/* Kit Entries Table */}
       {kitEntries.length > 0 && (

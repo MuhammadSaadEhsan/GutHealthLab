@@ -27,47 +27,94 @@ function LabReceived() {
     };
 
     // Submit logic
-    const submitDataLogic = async (code) => {
-        if (isSubmittingRef.current) return;
+    // const submitDataLogic = async (code) => {
+    //     if (isSubmittingRef.current) return;
 
-        if (!formData.qrCode) {
-            message.error('Kit ID is required');
-            return;
+    //     if (!formData.qrCode) {
+    //         message.error('Kit ID is required');
+    //         return;
+    //     }
+
+    //     isSubmittingRef.current = true;
+    //     setLoading(true);
+
+    //     try {
+    //         const myHeaders = new Headers();
+    //         myHeaders.append("Content-Type", "application/json");
+
+    //         const requestOptions = {
+    //             method: 'POST',
+    //             headers: myHeaders,
+    //             body: JSON.stringify({ qrCode: code }), // ✅ consistent key
+    //             redirect: 'follow',
+    //         };
+
+    //         const apiUrl2 = `${process.env.REACT_APP_API_URL}/t4kitsrec`; // ✅ fixed
+    //         const response = await fetch(apiUrl2, requestOptions);
+    //         const result = await response.json().catch(() => ({}));
+
+    //         if (response.ok) {
+    //             message.success(result.message || 'Kit scanned successfully!');
+    //             // navigate("/thank-you");
+    //         } else {
+    //             message.error(result.message || 'Something went wrong!');
+    //         }
+    //     } catch (error) {
+    //         message.error('An error occurred while submitting the form');
+    //         console.error(error);
+    //     } finally {
+    //         setFormData({ qrCode: '' });
+    //         setLoading(false);
+    //         isSubmittingRef.current = false;
+    //     }
+    // };
+
+
+
+const submitDataLogic = async (code) => {
+    if (isSubmittingRef.current) return;
+
+    if (!formData.qrCode) {
+        message.error('Kit ID is required');
+        return;
+    }
+
+    isSubmittingRef.current = true;
+    setLoading(true);
+
+    try {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const requestOptions = {
+            method: 'GET',  // Change method to GET as you're using a GET API
+            headers: myHeaders,
+            redirect: 'follow',
+        };
+
+        // Add the qrCode as a query parameter to the API URL
+        const apiUrl2 = `${process.env.REACT_APP_API_URL}/scankit?kitID=${code}`;
+
+        // Call the API with the GET request
+        const response = await fetch(apiUrl2, requestOptions);
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+            message.success(result.message || 'Kit scanned successfully!');
+            // navigate("/thank-you");
+        } else {
+            message.error(result.message || 'Something went wrong!');
         }
+    } catch (error) {
+        message.error('An error occurred while submitting the form');
+        console.error(error);
+    } finally {
+        setFormData({ qrCode: '' });
+        setLoading(false);
+        isSubmittingRef.current = false;
+    }
+};
 
-        isSubmittingRef.current = true;
-        setLoading(true);
-
-        try {
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: JSON.stringify({ qrCode: code }), // ✅ consistent key
-                redirect: 'follow',
-            };
-
-            const apiUrl2 = `${process.env.REACT_APP_API_URL}/t4kitsrec`; // ✅ fixed
-            const response = await fetch(apiUrl2, requestOptions);
-            const result = await response.json().catch(() => ({}));
-
-            if (response.ok) {
-                message.success(result.message || 'Kit scanned successfully!');
-                // navigate("/thank-you");
-            } else {
-                message.error(result.message || 'Something went wrong!');
-            }
-        } catch (error) {
-            message.error('An error occurred while submitting the form');
-            console.error(error);
-        } finally {
-            setFormData({ qrCode: '' });
-            setLoading(false);
-            isSubmittingRef.current = false;
-        }
-    };
 
     // Form submit handler
     const submitData = async (e) => {
