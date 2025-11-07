@@ -22,7 +22,9 @@ const oldkittypes = [
   'MicrobiomeAdvanced',
   'Parasitology Test',
   'Food Sensitivtiy 100',
-  'Food Sensitivtiy 210'
+  'Food Sensitivtiy 210',
+     "Food Sensitivity Advanced",
+        "FoodSensitivityMap CRP",
 ]
   useEffect(() => {
     if (showThankYou) {
@@ -176,6 +178,12 @@ const oldkittypes = [
       label: "Diabetes",
       icon: "/image53.svg",
       value: "diabetes",
+      selected: false,
+    },
+    {
+      label: "No health conditions or concerns",
+      icon: "",
+      value: "No health conditions or concerns",
       selected: false,
     },
   ]);

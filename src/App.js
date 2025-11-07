@@ -87,8 +87,8 @@ const AppContent = () => {
         <Route path="/foodsensitivityform" element={<NewMicrobiomeFormFull />} />
         <Route path="/parasitologyform" element={<NewMicrobiomeFormFull />} />
         <Route path="/candidaform" element={<NewMicrobiomeFormFull />} />
-        <Route path="/labrecieved" element={<LabRecieved />} />
-        <Route path="/postage" element={<Postage />} />
+        {/* <Route path="/labrecieved" element={<LabRecieved />} /> */}
+        {/* <Route path="/postage" element={<Postage />} /> */}
         <Route path="/oralmicrobiomeform" element={<NewMicrobiomeFormFull />} />
   
   <Route path="/new-microbiome-form" element={<NewMicrobiomeForm />} />

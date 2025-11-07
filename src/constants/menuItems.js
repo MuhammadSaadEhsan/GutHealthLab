@@ -47,22 +47,22 @@ export const menuItems = [
   //     </a>
   //   ),
   // },
-  {
-    key: "6",
-    label: (
-      <a  rel="noopener noreferrer" href="/postage">
-        Add Kit Form
-      </a>
-    ),
-  },
-  {
-    key: "7",
-    label: (
-      <a  rel="noopener noreferrer" href="/labrecieved">
-        Kit Received
-      </a>
-    ),
-  },
+  // {
+  //   key: "6",
+  //   label: (
+  //     <a  rel="noopener noreferrer" href="/postage">
+  //       Add Kit Form
+  //     </a>
+  //   ),
+  // },
+  // {
+  //   key: "7",
+  //   label: (
+  //     <a  rel="noopener noreferrer" href="/labrecieved">
+  //       Kit Received
+  //     </a>
+  //   ),
+  // },
   {
     key: "8",
     label: (

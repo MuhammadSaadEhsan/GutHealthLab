@@ -25,52 +25,6 @@ function LabReceived() {
             qrCode: code,
         });
     };
-
-    // Submit logic
-    // const submitDataLogic = async (code) => {
-    //     if (isSubmittingRef.current) return;
-
-    //     if (!formData.qrCode) {
-    //         message.error('Kit ID is required');
-    //         return;
-    //     }
-
-    //     isSubmittingRef.current = true;
-    //     setLoading(true);
-
-    //     try {
-    //         const myHeaders = new Headers();
-    //         myHeaders.append("Content-Type", "application/json");
-
-    //         const requestOptions = {
-    //             method: 'POST',
-    //             headers: myHeaders,
-    //             body: JSON.stringify({ qrCode: code }), // ✅ consistent key
-    //             redirect: 'follow',
-    //         };
-
-    //         const apiUrl2 = `${process.env.REACT_APP_API_URL}/t4kitsrec`; // ✅ fixed
-    //         const response = await fetch(apiUrl2, requestOptions);
-    //         const result = await response.json().catch(() => ({}));
-
-    //         if (response.ok) {
-    //             message.success(result.message || 'Kit scanned successfully!');
-    //             // navigate("/thank-you");
-    //         } else {
-    //             message.error(result.message || 'Something went wrong!');
-    //         }
-    //     } catch (error) {
-    //         message.error('An error occurred while submitting the form');
-    //         console.error(error);
-    //     } finally {
-    //         setFormData({ qrCode: '' });
-    //         setLoading(false);
-    //         isSubmittingRef.current = false;
-    //     }
-    // };
-
-
-
 const submitDataLogic = async (code) => {
     if (isSubmittingRef.current) return;
 
